@@ -1,0 +1,19 @@
+WaferSim
+
+This repository contains files adapted from Cerebras SDK examples
+(Copyright 2025 Cerebras Systems), licensed under the Apache License, Version 2.0
+(http://www.apache.org/licenses/LICENSE-2.0). They keep their original headers.
+The modifications add device-internal timing, parameters for the regression suite,
+and changes to the host drivers.
+
+  wse/bench/test/t1_gemmc2d/{layout.csl, pe.csl, run.py}
+      from examples/benchmarks/gemm-collectives_2d (SUMMA with <collectives_2d>)
+  wse/bench/test/u1_gemv/{layout.csl, pe.csl, run.py}
+      from a GEMV example with <collectives_2d> (host tic/toc protocol)
+  wse/bench/test/u2_gemvc2d/{layout.csl, pe.csl, run.py}
+      from examples/benchmarks/gemv-collectives_2d
+  wse/bench/test/t2_topic11/{layout.csl, pe_program.csl, run.py}
+      from examples/tutorials/topic-11-collectives (Cerebras/sdk-examples, Apache-2.0)
+
+No Cerebras SDK library sources (for example <collectives_2d>, <memcpy> or
+<tile_config>) are included. src/wse/c2d.h is an independent behavioural model.

@@ -1,0 +1,1 @@
+BM=17 BE=23 BS=49 BD=30 s0=11 s0c=1 cpl=5 disp=2 tdd=11 BT=32 BX=39 exit=6 KC=15 KP=9 rin=2 rout=4 buf=4 BRL=8 BR=8 turn=0 DL=0 ib=0 hop=2 link=1 LW=2 LY=0 BM0=0

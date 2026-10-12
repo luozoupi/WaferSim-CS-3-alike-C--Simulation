@@ -1,0 +1,66 @@
+param memcpy_params;
+param c2d_params;
+param MODE: u16;
+param COUNT: u16;
+param ROOT: u16;
+param COUNTY: u16;
+
+const x_done_id: local_task_id = @get_local_task_id(10);
+const y_done_id: local_task_id = @get_local_task_id(11);
+const sys_mod = @import_module("<memcpy/memcpy>", memcpy_params);
+const mpi_x = @import_module("<collectives_2d/pe>", .{ .dim_params = c2d_params.x });
+const mpi_y = @import_module("<collectives_2d/pe>", .{ .dim_params = c2d_params.y });
+const timestamp = @import_module("<time>");
+
+var ts0 = @zeros([timestamp.tsc_size_words]u16);
+var ts1 = @zeros([timestamp.tsc_size_words]u16);
+var ts2 = @zeros([timestamp.tsc_size_words]u16);
+var time_buf_u16 = @zeros([timestamp.tsc_size_words * 3]u16);
+var ptr_time_buf_u16: [*]u16 = &time_buf_u16;
+
+var abuf = @zeros([COUNT]u32);
+var bbuf = @zeros([COUNTY]u32);
+var pending: u16 = 0;
+
+fn main() void {
+  timestamp.get_timestamp(&ts0);
+  mpi_x.init();
+  mpi_y.init();
+  timestamp.get_timestamp(&ts1);
+  pending = if (MODE == 2) 2 else 1;
+  if (MODE != 1) mpi_x.broadcast(ROOT, @ptrcast([*]u32, &abuf), COUNT, x_done_id);
+  if (MODE != 0) mpi_y.broadcast(ROOT, @ptrcast([*]u32, &bbuf), COUNTY, y_done_id);
+}
+
+fn one_done() void {
+  pending -= 1;
+  if (pending == 0) {
+    timestamp.get_timestamp(&ts2);
+    sys_mod.unblock_cmd_stream();
+  }
+}
+task x_done() void { one_done(); }
+task y_done() void { one_done(); }
+
+fn f_enable_timer() void {
+  timestamp.enable_tsc();
+  sys_mod.unblock_cmd_stream();
+}
+
+fn f_memcpy_timestamps() void {
+  for (@range(u16, 3)) |i| {
+    time_buf_u16[i] = ts0[i];
+    time_buf_u16[3 + i] = ts1[i];
+    time_buf_u16[6 + i] = ts2[i];
+  }
+  sys_mod.unblock_cmd_stream();
+}
+
+comptime {
+  @bind_local_task(x_done, x_done_id);
+  @bind_local_task(y_done, y_done_id);
+  @export_symbol(ptr_time_buf_u16, "time_buf_u16");
+  @export_symbol(main);
+  @export_symbol(f_enable_timer);
+  @export_symbol(f_memcpy_timestamps);
+}

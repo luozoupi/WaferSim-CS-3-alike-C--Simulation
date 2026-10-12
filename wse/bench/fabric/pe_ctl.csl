@@ -1,0 +1,156 @@
+// Stage 1 / M1 addendum A: switch-advance and teardown probe PE program (generated routes in layout.csl).
+// Sender: up to 8 segments on colour SEND_C (one output queue), issued back to back through one async FSM task.
+//   SEGk bits 0-11 = count, bits 12-14 = kind: 1 data, 2 data with .advance_switch, 3 ctrl ADVANCE(no_ce),
+//   4 ctrl TEARDOWN(no_ce), 5 ctrl TEARDOWN+RESET(no_ce), 6 ctrl TEARDOWN+TEARDOWN(no_ce).
+//   Control words follow collectives_2d/ctrl_wavelet.csl: 3-bit commands {no_ce, type:2} at bits 22 (cmd0), 25 (cmd1).
+// Receivers: up to 2 fabin DSDs (RC0/RN0 on iq 2, RC1/RN1 on iq 3).
+// Teardown handler on colour TDC: stamp, inject one marker wavelet on MKC (R->R route, lands in iq 4) so the
+//   handler time shows up in the fabric trace, optionally exit teardown (TDX) and then send P2S words on SEND_C
+//   and/or receive P2R words on RC0.
+// Stamps: 0 entry, 1..8 segment k-1 done, 9 recv0 done, 10 recv1 done, 11 TD handler entry, 12 P2 send done,
+//   13 P2 recv done.
+param memcpy_params;
+param SEND_C: u16;
+param SEG0: u16; param SEG1: u16; param SEG2: u16; param SEG3: u16;
+param SEG4: u16; param SEG5: u16; param SEG6: u16; param SEG7: u16;
+param NRECV: u16; param RC0: u16; param RN0: u16; param RC1: u16; param RN1: u16;
+param TDC: u16; param MKC: u16; param TDX: u16; param P2S: u16; param P2R: u16;
+param SBN: u16; param RBN0: u16; param RBN1: u16;     // buffer sizes (words)
+
+const sys_mod = @import_module("<memcpy/memcpy>", memcpy_params);
+const timestamp = @import_module("<time>");
+const tile_config = @import_module("<tile_config>");
+
+const seg_id: local_task_id = @get_local_task_id(10);
+const r0_id: local_task_id = @get_local_task_id(11);
+const r1_id: local_task_id = @get_local_task_id(12);
+const oq = @get_output_queue(2);
+const mk_oq = @get_output_queue(3);
+const iq0 = @get_input_queue(2);
+const iq1 = @get_input_queue(3);
+const mk_iq = @get_input_queue(4);
+
+const NSLOT = 16;
+const SEGS = [8]u16{ SEG0, SEG1, SEG2, SEG3, SEG4, SEG5, SEG6, SEG7 };
+const CTRLW = [7]u32{ 0, 0, 0, 5 << 22, 7 << 22, (7 << 22) | (6 << 25), (7 << 22) | (7 << 25) };
+
+var sbuf = @zeros([SBN]u32);
+var rbuf0 = @zeros([RBN0]u32);
+var rbuf1 = @zeros([RBN1]u32);
+var cbuf = @zeros([1]u32);
+var mbuf = @zeros([1]u32);
+var st = @zeros([3 * NSLOT]u16);
+var tmp = @zeros([timestamp.tsc_size_words]u16);
+var time_buf_u16 = @zeros([3 * NSLOT]u16);
+var ptr_time_buf_u16: [*]u16 = &time_buf_u16;
+var pending: u16 = 0;
+var seg: u16 = 0;
+var p2s_active: bool = false;
+var p2r_active: bool = false;
+
+fn put(slot: u16) void {
+  timestamp.get_timestamp(&tmp);
+  st[3 * slot] = tmp[0]; st[3 * slot + 1] = tmp[1]; st[3 * slot + 2] = tmp[2];
+}
+fn one_done() void {
+  pending -= 1;
+  if (pending == 0) sys_mod.unblock_cmd_stream();
+}
+
+var fo = @get_dsd(fabout_dsd, .{ .extent = 1, .output_queue = oq });
+var fo_adv = @get_dsd(fabout_dsd, .{ .extent = 1, .output_queue = oq, .advance_switch = true });
+const fo_ctl = @get_dsd(fabout_dsd, .{ .extent = 1, .control = true, .output_queue = oq });
+var sm = @get_dsd(mem1d_dsd, .{ .tensor_access = |i|{1} -> sbuf[i] });
+var sm2 = @get_dsd(mem1d_dsd, .{ .tensor_access = |i|{1} -> sbuf[i] });
+const cm = @get_dsd(mem1d_dsd, .{ .tensor_access = |i|{1} -> cbuf[i] });
+const mk_out = @get_dsd(fabout_dsd, .{ .extent = 1, .output_queue = mk_oq });
+const mk_mem = @get_dsd(mem1d_dsd, .{ .tensor_access = |i|{1} -> mbuf[i] });
+var rin0 = @get_dsd(fabin_dsd, .{ .extent = 1, .input_queue = iq0 });
+var rmem0 = @get_dsd(mem1d_dsd, .{ .tensor_access = |i|{1} -> rbuf0[i] });
+const rin1 = @get_dsd(fabin_dsd, .{ .extent = RN1, .input_queue = iq1 });
+const rmem1 = @get_dsd(mem1d_dsd, .{ .tensor_access = |i|{RN1} -> rbuf1[i] });
+
+// one call site per DSD kind (keeps the DSR allocator happy)
+fn send_data(n: u16) void {
+  fo = @set_dsd_length(fo, n); sm = @set_dsd_length(sm, n);
+  @mov32(fo, sm, .{ .async = true, .activate = seg_id });
+}
+fn send_adv(n: u16) void {
+  fo_adv = @set_dsd_length(fo_adv, n); sm2 = @set_dsd_length(sm2, n);
+  @mov32(fo_adv, sm2, .{ .async = true, .activate = seg_id });
+}
+fn send_ctl(w: u32) void {
+  cbuf[0] = w;
+  @mov32(fo_ctl, cm, .{ .async = true, .activate = seg_id });
+}
+fn recv0_start(n: u16) void {
+  rin0 = @set_dsd_length(rin0, n); rmem0 = @set_dsd_length(rmem0, n);
+  @mov32(rmem0, rin0, .{ .async = true, .activate = r0_id });
+}
+
+task seg_task() void {
+  if (p2s_active) { p2s_active = false; put(12); one_done(); return; }
+  if (seg > 0) put(seg);
+  if (seg >= 8 or SEGS[seg] == 0) { one_done(); return; }
+  const k = SEGS[seg] >> 12;
+  const n = SEGS[seg] & 0xFFF;
+  seg += 1;
+  if (k == 1) { send_data(n); }
+  else if (k == 2) { send_adv(n); }
+  else { send_ctl(CTRLW[k]); }
+}
+task recv0() void {
+  if (p2r_active) { p2r_active = false; put(13); } else { put(9); }
+  one_done();
+}
+task recv1() void { put(10); one_done(); }
+
+fn td_handler() void {
+  put(11);
+  if (MKC > 0) { @mov32(mk_out, mk_mem, .{ .async = true }); }
+  if (TDX == 1) {
+    tile_config.teardown.exit(@get_color(TDC));
+    if (P2S > 0) { p2s_active = true; send_data(P2S); }
+    if (P2R > 0) { p2r_active = true; recv0_start(P2R); }
+  }
+  one_done();
+}
+
+fn main() void {
+  put(0);
+  pending = NRECV;
+  if (SEG0 > 0) pending += 1;
+  if (TDC > 0) pending += 1;
+  if (TDX == 1 and P2S > 0) pending += 1;
+  if (TDX == 1 and P2R > 0) pending += 1;
+  if (pending == 0) { sys_mod.unblock_cmd_stream(); return; }
+  if (NRECV > 0) { recv0_start(RN0); }
+  if (NRECV > 1) { @mov32(rmem1, rin1, .{ .async = true, .activate = r1_id }); }
+  if (SEG0 > 0) { @activate(seg_id); }
+}
+
+fn f_enable_timer() void { timestamp.enable_tsc(); sys_mod.unblock_cmd_stream(); }
+fn f_memcpy_timestamps() void {
+  for (@range(u16, 3 * NSLOT)) |i| { time_buf_u16[i] = st[i]; }
+  sys_mod.unblock_cmd_stream();
+}
+
+comptime {
+  @bind_local_task(seg_task, seg_id);
+  @bind_local_task(recv0, r0_id);
+  @bind_local_task(recv1, r1_id);
+  if (TDC > 0) { @set_teardown_handler(td_handler, @get_color(TDC)); }
+  if (@is_arch("wse3")) {
+    if (SEND_C > 0) { @initialize_queue(oq, .{ .color = @get_color(SEND_C) }); }
+    if (MKC > 0) {
+      @initialize_queue(mk_oq, .{ .color = @get_color(MKC) });
+      @initialize_queue(mk_iq, .{ .color = @get_color(MKC) });
+    }
+    if (NRECV > 0) { @initialize_queue(iq0, .{ .color = @get_color(RC0) }); }
+    if (NRECV > 1) { @initialize_queue(iq1, .{ .color = @get_color(RC1) }); }
+  }
+  @export_symbol(ptr_time_buf_u16, "time_buf_u16");
+  @export_symbol(main);
+  @export_symbol(f_enable_timer);
+  @export_symbol(f_memcpy_timestamps);
+}

@@ -1,0 +1,1 @@
+hop=2 link=1 buf=4 rin=2 rout=4 turn=0 costs=results/c2d_costs_G.txt init=25 init2=9 td2=6 LW=2 LY=0 kts2=10 disp=3 cpl=-4 fwl=6 fwc=8 s0=10 s0c=7 oq=8 a0=1 tdd=3 tail=6 td2x=-1 dcy=-6

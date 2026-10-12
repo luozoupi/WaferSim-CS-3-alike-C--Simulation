@@ -1,0 +1,106 @@
+// Stage 1 Addendum G calibration kernel (adapted from wse/bench/collbench/pe.csl): both <collectives_2d> modules
+// initialised; an x-dimension op (row configuration) is called from main after both inits, and its callback calls a
+// y-dimension op (column configuration).  The callbacks mirror collbench's done task (counter test, then the next call
+// or the final stamp).  Stamps: ts0 main entry, ts1 after both inits, ts2 in the x callback, ts3 in the y callback.
+param memcpy_params;
+param c2d_params;
+param XOP: u16; param XROOT: u16; param XCOUNT: u16;
+param YOP: u16; param YROOT: u16; param YCOUNT: u16;
+param PXN: u16; param PYN: u16;
+
+const xdone_id: local_task_id = @get_local_task_id(10);
+const ydone_id: local_task_id = @get_local_task_id(11);
+const sys_mod = @import_module("<memcpy/memcpy>", memcpy_params);
+const mpi_x = @import_module("<collectives_2d/pe>", .{ .dim_params = c2d_params.x });
+const mpi_y = @import_module("<collectives_2d/pe>", .{ .dim_params = c2d_params.y });
+const timestamp = @import_module("<time>");
+
+var ts0 = @zeros([timestamp.tsc_size_words]u16);
+var ts1 = @zeros([timestamp.tsc_size_words]u16);
+var ts2 = @zeros([timestamp.tsc_size_words]u16);
+var ts3 = @zeros([timestamp.tsc_size_words]u16);
+var time_buf_u16 = @zeros([timestamp.tsc_size_words * 4]u16);
+var ptr_time_buf_u16: [*]u16 = &time_buf_u16;
+
+var xs = @zeros([XCOUNT * PXN]u32);
+var xr = @zeros([XCOUNT * PXN]u32);
+var xfs = @zeros([XCOUNT]f32);
+var xfr = @zeros([XCOUNT]f32);
+var ys = @zeros([YCOUNT * PYN]u32);
+var yr = @zeros([YCOUNT * PYN]u32);
+var yfs = @zeros([YCOUNT]f32);
+var yfr = @zeros([YCOUNT]f32);
+var ndone: u16 = 0;
+
+fn start_x() void {
+  if (XOP == 0) {
+    mpi_x.broadcast(XROOT, @ptrcast([*]u32, &xs), XCOUNT, xdone_id);
+  } else if (XOP == 1) {
+    mpi_x.scatter(XROOT, @ptrcast([*]u32, &xs), @ptrcast([*]u32, &xr), XCOUNT, xdone_id);
+  } else if (XOP == 2) {
+    mpi_x.gather(XROOT, @ptrcast([*]u32, &xs), @ptrcast([*]u32, &xr), XCOUNT, xdone_id);
+  } else {
+    mpi_x.reduce_fadds(XROOT, @ptrcast([*]f32, &xfs), @ptrcast([*]f32, &xfr), XCOUNT, xdone_id);
+  }
+}
+
+fn start_y() void {
+  if (YOP == 0) {
+    mpi_y.broadcast(YROOT, @ptrcast([*]u32, &ys), YCOUNT, ydone_id);
+  } else if (YOP == 1) {
+    mpi_y.scatter(YROOT, @ptrcast([*]u32, &ys), @ptrcast([*]u32, &yr), YCOUNT, ydone_id);
+  } else if (YOP == 2) {
+    mpi_y.gather(YROOT, @ptrcast([*]u32, &ys), @ptrcast([*]u32, &yr), YCOUNT, ydone_id);
+  } else {
+    mpi_y.reduce_fadds(YROOT, @ptrcast([*]f32, &yfs), @ptrcast([*]f32, &yfr), YCOUNT, ydone_id);
+  }
+}
+
+fn main() void {
+  timestamp.get_timestamp(&ts0);
+  mpi_x.init();
+  mpi_y.init();
+  timestamp.get_timestamp(&ts1);
+  ndone = 0;
+  start_x();
+}
+
+task x_done() void {
+  ndone += 1;
+  if (ndone < 2) {
+    timestamp.get_timestamp(&ts2);
+    start_y();
+  }
+}
+
+task y_done() void {
+  ndone += 1;
+  if (ndone >= 2) {
+    timestamp.get_timestamp(&ts3);
+    sys_mod.unblock_cmd_stream();
+  }
+}
+
+fn f_enable_timer() void {
+  timestamp.enable_tsc();
+  sys_mod.unblock_cmd_stream();
+}
+
+fn f_memcpy_timestamps() void {
+  for (@range(u16, 3)) |i| {
+    time_buf_u16[i] = ts0[i];
+    time_buf_u16[3 + i] = ts1[i];
+    time_buf_u16[6 + i] = ts2[i];
+    time_buf_u16[9 + i] = ts3[i];
+  }
+  sys_mod.unblock_cmd_stream();
+}
+
+comptime {
+  @bind_local_task(x_done, xdone_id);
+  @bind_local_task(y_done, ydone_id);
+  @export_symbol(ptr_time_buf_u16, "time_buf_u16");
+  @export_symbol(main);
+  @export_symbol(f_enable_timer);
+  @export_symbol(f_memcpy_timestamps);
+}

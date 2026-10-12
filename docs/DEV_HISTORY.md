@@ -1,0 +1,51 @@
+# Development history (private development fork)
+
+The stage reports and pre-registrations cite commit hashes from the private development fork (a fork of Princeton muchiSim, branch `wse`). That fork is not published, because its history also contains muchiSim code and Cerebras SDK library sources. Its commit log is reproduced below so the pre-registration timeline can still be checked: each addendum's commit precedes the data or evaluation it governs. Hashes are abbreviated; dates are commit dates (US Central time).
+
+- `f08187e` 2026-09-24 16:46, Eval baseline: hop-latency/FFT-cost macros, SDK FFT ring port, pilot WSE twins
+- `02dad4e` 2026-09-24 16:48, wse: research roadmap, Stage-0 pre-registration, collectives microbenchmark harness
+- `34ff0ac` 2026-09-24 17:26, Stage 0: router multicast, collective primitives calibrated on simfab microbenchmarks (pre-prediction snapshot)
+- `b42bb00` 2026-09-24 17:36, Stage 0: blind GEMV/SUMMA predictions and gate (FAIL) - recorded before post-hoc diagnosis
+- `cf69fa2` 2026-09-24 18:19, Stage 0 post-hoc diagnosis: host-induced row-0 launch skew (GEMV), concurrent x+y broadcast serialization (SUMMA); report and roadmap re-scope
+- `70387a9` 2026-09-24 21:10, Stage 0b pre-registration (before any 0b measurement)
+- `0fada00` 2026-09-25 13:20, Stage 0b: model freeze (launch law, teardown gates, gather teardown, PE collective engine, chain transitions) + calibration/validation data; pre-registration addendum A
+- `5fa25fc` 2026-09-25 13:37, Stage 0b: blind predictions (S0b, S0b-probe, S0, A0b) for T1/T2 and GEMV/SUMMA regression - committed before any test ground truth
+- `966b1dc` 2026-09-25 19:27, Stage 0b: simfab ground truth for T1/T2 and pre-registered gate (FAIL: 14/16 test points within 5%, GEMV P64 -5.3%)
+- `683cb79` 2026-09-25 19:27, Stage 0b report and roadmap update
+- `82dd480` 2026-09-25 22:52, Stage 0c pre-registration (re-scope after 0b gate failure; before any 0c measurement)
+- `0b539b6` 2026-09-26 03:03, Stage 0c: calibration families A-C, second-module teardown cost, launch law v2, test-kernel twins; model freeze (addendum A)
+- `3907146` 2026-09-26 03:26, Stage 0c: blind predictions (S0c, S0c-probe, S0b, A0c) for U1-U4 and regression - committed before any U1-U4 ground truth
+- `b65cf87` 2026-09-26 04:55, Stage 0c: simfab ground truth for U1-U4 and gate (FAIL: 15/19 within 5%, median 1.05%)
+- `fd76004` 2026-09-26 04:56, Stage 0c report and roadmap update
+- `70ba9b0` 2026-09-26 15:06, Close Stage 0: Stage 0c model frozen as collectives baseline; carried-forward gaps
+- `3208b35` 2026-09-26 15:10, Stage 1: plan (new deterministic wavelet-level fabric engine), pre-registration
+- `3f77273` 2026-09-26 15:12, Stage 1 M1: fabric microbenchmark cases with train/hold-out split (fixed before any run)
+- `67d66ce` 2026-09-26 15:18, Stage 1 M1/M2: fabric microbench generator (traced simfab sweep) + deterministic wavelet-level fabric engine and harness
+- `a8a3784` 2026-09-26 15:38, Stage 1 M1 Addendum A: switch-advance and teardown families (pre-registered before runs), pe_ctl.csl probe
+- `1f60741` 2026-09-26 15:43, Stage 1 M2b/M3: switch positions, control wavelets, pop/no_ce, teardown, filter, advance_switch sideband; F1 PE model (pe.h); fabsim2 + compare2; unit tests
+- `37f8543` 2026-09-26 15:51, Stage 1 M5: <collectives_2d> ported to F1 + fabric (c2d.h), payload tracking, 720-config functional test; fabric: per-port input buffers, credit-aware round-robin (fixes two deadlock/order bugs found by the port)
+- `2f3951f` 2026-09-26 15:52, Stage 1 Addendum B: M5 constant sources fixed before any collectives comparison
+- `e3d5a82` 2026-09-26 15:56, Stage 1 M1: packed traced sweep (shelf-packed cases per simfab run, full per-wavelet lists); compare2 dedupes packed/unpacked rows
+- `2c7ef2f` 2026-09-26 19:07, M1 packed sweep: decode all CTF streams (simfab splits tiles over traceFiles streams; decode_trace.py read stream0 only), fail on discarded events
+- `9144de7` 2026-09-26 19:48, Stage 1 M1/M2: fabric semantics from Addendum A train traces -- one FIFO per colour, accept only on the selected input and not in teardown, control commands act on the input side at acceptance and the output side at forwarding, .advance_switch at ramp injection; F1: receive bubble, task entry/bookkeeping costs, probe start delays; compare2 caching + parallel; fit_m1.py (train rows only)
+- `f3e6471` 2026-09-26 21:02, Stage 1 Addendum C (before hold-out): packed data, semantics from train traces, runtime-traffic replay, backpressure probe flaw, freeze procedure; blind predict/gate scripts
+- `cb77add` 2026-09-26 21:07, Stage 1 M1 freeze: train-only profile (profile_m1.txt) and blind hold-out predictions (Addendum C step 3)
+- `15683ed` 2026-09-26 21:08, Stage 1 M1 gate item 1: 203/205 hold-out metrics within 3% (median 0.00%) -- FAIL narrowly (sachain_N8_B1 -3.85% = 1 cycle, saring_B64 +3.39% probe-variant timing); M1 data (gzip), hw_lib refs
+- `4d1ee66` 2026-09-26 21:10, Stage 1 M5 evaluation under Addendum B constants: collbench median 25.6%, chain 30.0%, coll2d single 10.0% -- gate item 2 FAIL; deficit is per-op-kind library CPU cost (bcast ~33, scatter ~190, gather ~120-225, reduce ~250-630 + ~4.5/PE), fabric P-slopes match
+- `68dcca4` 2026-09-27 15:34, Stage 1 Addendum D: M5 diagnosis round -- disjoint traced calibration set (P=12, 28 rows), extraction and evaluation rules, written before the run
+- `d6db77b` 2026-09-27 15:35, Stage 1 Addendum D calibration bench (P=12, 28 rows, collbench pe.csl unchanged)
+- `dfbbec9` 2026-09-27 15:43, Stage 1 Addendum D freeze: library cost table from P=12 calibration traces, output-queue PE option, cost-table port mode; residual scalars fitted on calibration rows only (mean 0.23%, max 1.0%); blind gate-set predictions (m5_pred.json)
+- `bb2fbfb` 2026-09-27 15:45, Stage 1 gate item 2 (Addendum D, evaluated once): collbench median 0.52% max 6.72% (FAIL on max: reduce P>=32), chain median 1.04% PASS, coll2d single 0.28% PASS; concurrent 2.70% (not gated). Gate item 4 determinism: 3 repeated runs byte-identical
+- `57c4226` 2026-09-27 22:05, Stage 1 Addendum E (before run): second calibration P=40 for the M5 cost table
+- `7a6dc39` 2026-09-27 22:06, c2dcal: calibration P from CAL_P (12 default, 40 for Addendum E)
+- `9e38f7c` 2026-09-27 22:12, Stage 1 Addendum E freeze: cost table linear in count and P from P=12+40 traces; residual scalars refit on the 56 calibration rows (mean 0.27%, max 1.13%; fwl 6, fwd capacity 8 from measured 1/cycle pace); harness arg-length fix; blind gate-set predictions m5e_pred.json
+- `4f862a5` 2026-09-27 22:12, Stage 1 gate item 2 PASS (Addendum E, evaluated once): collbench median 0.41% max 2.06% (144/144 within 5%), chain median 1.00%, coll2d single 0.28%; concurrent 2.70% (not gated)
+- `e2f2129` 2026-09-27 22:15, Stage 1 Addendum F (before implementation): gate item 3 regression-suite port, constant sources, evaluation rule
+- `5f127ce` 2026-09-27 22:21, Stage 1 Addendum F: regression kernels on the Stage 1 engine (kersim), blind predictions for the 55 regression rows (m5f_pred.json), committed before evaluation
+- `60b3009` 2026-09-27 22:21, Stage 1 gate item 3 (Addendum F, evaluated once): U gate median 2.15% (> 1.55%) -> FAIL; 53/55 within 5% (S0c 50/55); fixes 4 of 5 Stage 0c misses (U3_2x2x2 x2, U1/U2_2x2 P64, T2_c3_y P16); regressions T2_c16_y P64 +5.13%, U2_2x2 P4 -5.6%; SUMMA within 1%; U4 under-predicted 1.4-3%
+- `df2c6a8` 2026-09-28 02:28, Stage 1 Addendum G (before run): y-dim and two-module library costs, P=24 2D calibration, final-model evaluation rule
+- `0b968b2` 2026-09-28 02:30, Stage 1 Addendum G calibration bench (24x24, two modules, x-op from main then chained y-op)
+- `e6c612a` 2026-09-28 02:46, Stage 1 Addendum G freeze: x2./y. cost entries from the P=24 two-module calibration traces (871 entries), prefix-aware lookup (two-module programs only), calibration windows mean 0.31% max 1.08% with td2x=-1 dcy=-6 (fitted on calibration windows only; per-PE measured init as calibration input); blind predictions for gate item 2 (m5g_pred.json; collbench/chain unchanged vs E) and gate item 3 (m5g3_pred.json)
+- `807da91` 2026-09-28 02:46, Stage 1 final (Addendum G) evaluation, run once: gate item 2 PASS (collbench 0.41%, chain 1.00%, coll2d single 1.01%); gate item 3 FAIL (U gate median 2.01% > 1.55%; 53/55 within 5%; regressions T2_c16_y P64 +5.12%, U2_2x2 P4 -5.27%; SUMMA within 1%)
+- `6c28c2b` 2026-09-28 02:48, Stage 1 M6 report: gate FAIL (items 1 and 3), items 2 and 4 PASS; findings and Stage 2 carry-overs
+- `ea8fd9d` 2026-10-12 14:14, Portability: scratch spec files default to the system temp dir (SCR env overrides)

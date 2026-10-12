@@ -1,0 +1,34 @@
+// Stage-0 post-hoc: 2D collective microbenchmark on a P x P grid (simfab WSE-3).
+// MODE 0: every row broadcasts along x from column ROOT; 1: every column along y from row ROOT;
+// 2: both concurrently (one SUMMA step without compute). COUNT words per broadcast.
+param P: u16;
+param MODE: u16;
+param COUNT: u16;
+param ROOT: u16;
+param COUNTY: u16;   // y-broadcast count (asymmetric concurrency); COUNT is the x count
+
+const memcpy = @import_module("<memcpy/get_params>", .{ .width = P, .height = P });
+const c2d = @import_module("<collectives_2d/params>");
+
+layout {
+  @set_rectangle(P, P);
+  var px: u16 = 0;
+  while (px < P) : (px += 1) {
+    const memcpy_params = memcpy.get_params(px);
+    var py: u16 = 0;
+    while (py < P) : (py += 1) {
+      const c2d_params = c2d.get_params(px, py, .{
+        .x_colors      = .{ @get_color(0),          @get_color(1) },
+        .x_entrypoints = .{ @get_local_task_id(14), @get_local_task_id(15) },
+        .y_colors      = .{ @get_color(4),          @get_color(5) },
+        .y_entrypoints = .{ @get_local_task_id(16), @get_local_task_id(17) },
+      });
+      @set_tile_code(px, py, "pe.csl", .{ .memcpy_params = memcpy_params, .c2d_params = c2d_params,
+                                          .MODE = MODE, .COUNT = COUNT, .ROOT = ROOT, .COUNTY = COUNTY });
+    }
+  }
+  @export_name("time_buf_u16", [*]u16, true);
+  @export_name("main", fn()void);
+  @export_name("f_enable_timer", fn()void);
+  @export_name("f_memcpy_timestamps", fn()void);
+}

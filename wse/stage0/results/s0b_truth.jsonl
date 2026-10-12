@@ -1,0 +1,18 @@
+{"key": "T1_t8/P4", "kernel": "T1", "var": "t8", "P": 4, "dir": "t1_gemmc2d", "params": "P:4,Mt:8,Kt:8,Nt:8", "success": true, "wall_s": 8.494442701339722, "cs": 14230}
+{"key": "T1_t8/P8", "kernel": "T1", "var": "t8", "P": 8, "dir": "t1_gemmc2d", "params": "P:8,Mt:8,Kt:8,Nt:8", "success": true, "wall_s": 15.562209844589233, "cs": 28466}
+{"key": "T1_t8/P16", "kernel": "T1", "var": "t8", "P": 16, "dir": "t1_gemmc2d", "params": "P:16,Mt:8,Kt:8,Nt:8", "success": true, "wall_s": 85.74644923210144, "cs": 56944}
+{"key": "T1_t8/P32", "kernel": "T1", "var": "t8", "P": 32, "dir": "t1_gemmc2d", "params": "P:32,Mt:8,Kt:8,Nt:8", "success": true, "wall_s": 242.09557700157166, "cs": 113970}
+{"key": "T1_t4/P4", "kernel": "T1", "var": "t4", "P": 4, "dir": "t1_gemmc2d", "params": "P:4,Mt:4,Kt:4,Nt:4", "success": true, "wall_s": 6.978881597518921, "cs": 4790}
+{"key": "T1_t4/P8", "kernel": "T1", "var": "t4", "P": 8, "dir": "t1_gemmc2d", "params": "P:8,Mt:4,Kt:4,Nt:4", "success": true, "wall_s": 10.185054540634155, "cs": 9566}
+{"key": "T1_t4/P16", "kernel": "T1", "var": "t4", "P": 16, "dir": "t1_gemmc2d", "params": "P:16,Mt:4,Kt:4,Nt:4", "success": true, "wall_s": 32.10629653930664, "cs": 19172}
+{"key": "T1_t4/P32", "kernel": "T1", "var": "t4", "P": 32, "dir": "t1_gemmc2d", "params": "P:32,Mt:4,Kt:4,Nt:4", "success": true, "wall_s": 81.5717601776123, "cs": 38452}
+{"key": "T2_c3/P4", "kernel": "T2", "var": "c3", "P": 4, "dir": "t2_topic11", "params": "Pw:4,Ph:4,chunk_size:3", "success": true, "wall_s": 7.838873863220215, "x": 1177, "y": 1521}
+{"key": "T2_c3/P8", "kernel": "T2", "var": "c3", "P": 8, "dir": "t2_topic11", "params": "Pw:8,Ph:8,chunk_size:3", "success": true, "wall_s": 10.905042886734009, "x": 1253, "y": 1909}
+{"key": "T2_c3/P16", "kernel": "T2", "var": "c3", "P": 16, "dir": "t2_topic11", "params": "Pw:16,Ph:16,chunk_size:3", "success": true, "wall_s": 35.47973394393921, "x": 1404, "y": 2910}
+{"key": "T2_c3/P32", "kernel": "T2", "var": "c3", "P": 32, "dir": "t2_topic11", "params": "Pw:32,Ph:32,chunk_size:3", "success": true, "wall_s": 139.27515697479248, "x": 1711, "y": 5974}
+{"key": "T2_c3/P64", "kernel": "T2", "var": "c3", "P": 64, "dir": "t2_topic11", "params": "Pw:64,Ph:64,chunk_size:3", "success": true, "wall_s": 2599.676455259323, "x": 2319, "y": 17088}
+{"key": "T2_c16/P4", "kernel": "T2", "var": "c16", "P": 4, "dir": "t2_topic11", "params": "Pw:4,Ph:4,chunk_size:16", "success": true, "wall_s": 8.388850688934326, "x": 1307, "y": 2012}
+{"key": "T2_c16/P8", "kernel": "T2", "var": "c16", "P": 8, "dir": "t2_topic11", "params": "Pw:8,Ph:8,chunk_size:16", "success": true, "wall_s": 19.132661819458008, "x": 1513, "y": 3240}
+{"key": "T2_c16/P16", "kernel": "T2", "var": "c16", "P": 16, "dir": "t2_topic11", "params": "Pw:16,Ph:16,chunk_size:16", "success": true, "wall_s": 115.58519864082336, "x": 1925, "y": 6897}
+{"key": "T2_c16/P32", "kernel": "T2", "var": "c16", "P": 32, "dir": "t2_topic11", "params": "Pw:32,Ph:32,chunk_size:16", "success": true, "wall_s": 667.9374461174011, "x": 2751, "y": 20364}
+{"key": "T2_c16/P64", "kernel": "T2", "var": "c16", "P": 64, "dir": "t2_topic11", "params": "Pw:64,Ph:64,chunk_size:16", "success": true, "wall_s": 16793.47745490074, "x": 4399, "y": 72414}

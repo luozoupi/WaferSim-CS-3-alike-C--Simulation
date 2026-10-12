@@ -1,0 +1,39 @@
+// Stage-0b launch probe (2D): recovers every PE's real launch offset and TSC-enable offset for an arbitrary
+// host command sequence.  At each launch of `main` a PE stamps its entry (local TSC) and sends one wavelet
+// east and one south; it stamps the arrivals from west and north.  Colours alternate with column/row parity
+// so a PE's send and receive routes never share a colour.  Two launch rounds are supported.
+param Pw: u16;
+param Ph: u16;
+param DIR: u16;     // 0: east/west exchange only, 1: south/north only (one receive task per PE)
+
+const memcpy = @import_module("<memcpy/get_params>", .{ .width = Pw, .height = Ph });
+const cx = [2]color{ @get_color(0), @get_color(1) };   // eastward, by sender column parity
+const cy = [2]color{ @get_color(2), @get_color(3) };   // southward, by sender row parity
+
+layout {
+  @set_rectangle(Pw, Ph);
+  var px: u16 = 0;
+  while (px < Pw) : (px += 1) {
+    const memcpy_params = memcpy.get_params(px);
+    var py: u16 = 0;
+    while (py < Ph) : (py += 1) {
+      // DIR 0: send east / receive from west; 1: south / north; 2: west / east; 3: north / south
+      @set_tile_code(px, py, "pe4.csl", .{ .memcpy_params = memcpy_params, .px = px, .py = py, .Pw = Pw, .Ph = Ph,
+        .DIR = DIR, .send_c = if (DIR % 2 == 0) cx[px % 2] else cy[py % 2],
+        .recv_c = if (DIR % 2 == 0) cx[(px + 1) % 2] else cy[(py + 1) % 2] });
+      if (DIR == 0 and px + 1 < Pw) @set_color_config(px, py, cx[px % 2], .{ .routes = .{ .rx = .{ RAMP }, .tx = .{ EAST } } });
+      if (DIR == 0 and px > 0)      @set_color_config(px, py, cx[(px + 1) % 2], .{ .routes = .{ .rx = .{ WEST }, .tx = .{ RAMP } } });
+      if (DIR == 1 and py + 1 < Ph) @set_color_config(px, py, cy[py % 2], .{ .routes = .{ .rx = .{ RAMP }, .tx = .{ SOUTH } } });
+      if (DIR == 1 and py > 0)      @set_color_config(px, py, cy[(py + 1) % 2], .{ .routes = .{ .rx = .{ NORTH }, .tx = .{ RAMP } } });
+      if (DIR == 2 and px > 0)      @set_color_config(px, py, cx[px % 2], .{ .routes = .{ .rx = .{ RAMP }, .tx = .{ WEST } } });
+      if (DIR == 2 and px + 1 < Pw) @set_color_config(px, py, cx[(px + 1) % 2], .{ .routes = .{ .rx = .{ EAST }, .tx = .{ RAMP } } });
+      if (DIR == 3 and py > 0)      @set_color_config(px, py, cy[py % 2], .{ .routes = .{ .rx = .{ RAMP }, .tx = .{ NORTH } } });
+      if (DIR == 3 and py + 1 < Ph) @set_color_config(px, py, cy[(py + 1) % 2], .{ .routes = .{ .rx = .{ SOUTH }, .tx = .{ RAMP } } });
+    }
+  }
+  @export_name("buf", [*]f32, true);
+  @export_name("time_buf_u16", [*]u16, true);
+  @export_name("main", fn()void);
+  @export_name("f_enable_timer", fn()void);
+  @export_name("f_memcpy_timestamps", fn()void);
+}

@@ -1,0 +1,82 @@
+param memcpy_params;
+param c2d_params;
+param OP: u16;
+param DIM: u16;
+param COUNT: u16;
+param ROOT: u16;
+param REPS: u16;
+param OP2: u16;
+param ROOT2: u16;
+param NPE: u16;
+
+const done_id: local_task_id = @get_local_task_id(10);
+const sys_mod = @import_module("<memcpy/memcpy>", memcpy_params);
+const mpi = @import_module("<collectives_2d/pe>", .{ .dim_params = if (DIM == 0) c2d_params.x else c2d_params.y });
+const timestamp = @import_module("<time>");
+
+var ts0 = @zeros([timestamp.tsc_size_words]u16);
+var ts1 = @zeros([timestamp.tsc_size_words]u16);
+var ts2 = @zeros([timestamp.tsc_size_words]u16);
+var time_buf_u16 = @zeros([timestamp.tsc_size_words * 3]u16);
+var ptr_time_buf_u16: [*]u16 = &time_buf_u16;
+
+var sbuf = @zeros([COUNT * NPE]u32);
+var rbuf = @zeros([COUNT * NPE]u32);
+var fsbuf = @zeros([COUNT]f32);
+var frbuf = @zeros([COUNT]f32);
+var rep: u16 = 0;
+
+fn run_op(op: u16, root: u16) void {
+  if (op == 0) {
+    mpi.broadcast(root, @ptrcast([*]u32, &sbuf), COUNT, done_id);
+  } else if (op == 1) {
+    mpi.scatter(root, @ptrcast([*]u32, &sbuf), @ptrcast([*]u32, &rbuf), COUNT, done_id);
+  } else if (op == 2) {
+    mpi.gather(root, @ptrcast([*]u32, &sbuf), @ptrcast([*]u32, &rbuf), COUNT, done_id);
+  } else {
+    mpi.reduce_fadds(root, @ptrcast([*]f32, &fsbuf), @ptrcast([*]f32, &frbuf), COUNT, done_id);
+  }
+}
+fn start_op() void {
+  if (rep == 0) { run_op(OP, ROOT); } else { run_op(OP2, ROOT2); }
+}
+
+fn main() void {
+  timestamp.get_timestamp(&ts0);
+  mpi.init();
+  timestamp.get_timestamp(&ts1);
+  rep = 0;
+  start_op();
+}
+
+task done() void {
+  rep += 1;
+  if (rep < 2) {
+    start_op();
+  } else {
+    timestamp.get_timestamp(&ts2);
+    sys_mod.unblock_cmd_stream();
+  }
+}
+
+fn f_enable_timer() void {
+  timestamp.enable_tsc();
+  sys_mod.unblock_cmd_stream();
+}
+
+fn f_memcpy_timestamps() void {
+  for (@range(u16, 3)) |i| {
+    time_buf_u16[i] = ts0[i];
+    time_buf_u16[3 + i] = ts1[i];
+    time_buf_u16[6 + i] = ts2[i];
+  }
+  sys_mod.unblock_cmd_stream();
+}
+
+comptime {
+  @bind_local_task(done, done_id);
+  @export_symbol(ptr_time_buf_u16, "time_buf_u16");
+  @export_symbol(main);
+  @export_symbol(f_enable_timer);
+  @export_symbol(f_memcpy_timestamps);
+}

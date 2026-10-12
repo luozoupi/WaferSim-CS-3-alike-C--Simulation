@@ -1,0 +1,42 @@
+// Stage-0 microbenchmark: latency of one <collectives_2d> operation on a line of PEs.
+// OP: 0 broadcast, 1 scatter, 2 gather, 3 reduce_fadds.  DIM: 0 = row (x), 1 = column (y).
+// REPS chained operations (each callback starts the next). Device-internal timing:
+// stamp 0 at main() entry, stamp 1 after mpi.init(), stamp 2 in the final callback.
+param Pw: u16;
+param Ph: u16;
+param OP: u16;
+param DIM: u16;
+param COUNT: u16;
+param ROOT: u16;
+param REPS: u16;
+param OP2: u16;    // second op (chained in op1's callback)
+param ROOT2: u16;
+
+const memcpy = @import_module("<memcpy/get_params>", .{ .width = Pw, .height = Ph });
+const c2d = @import_module("<collectives_2d/params>");
+
+layout {
+  @set_rectangle(Pw, Ph);
+  var px: u16 = 0;
+  while (px < Pw) : (px += 1) {
+    const memcpy_params = memcpy.get_params(px);
+    var py: u16 = 0;
+    while (py < Ph) : (py += 1) {
+      const c2d_params = c2d.get_params(px, py, .{
+        .x_colors      = .{ @get_color(0),          @get_color(1) },
+        .x_entrypoints = .{ @get_local_task_id(14), @get_local_task_id(15) },
+        .y_colors      = .{ @get_color(4),          @get_color(5) },
+        .y_entrypoints = .{ @get_local_task_id(16), @get_local_task_id(17) },
+      });
+      @set_tile_code(px, py, "pe.csl", .{
+        .memcpy_params = memcpy_params, .c2d_params = c2d_params,
+        .OP = OP, .DIM = DIM, .COUNT = COUNT, .ROOT = ROOT, .REPS = REPS, .OP2 = OP2, .ROOT2 = ROOT2,
+        .NPE = if (DIM == 0) Pw else Ph,
+      });
+    }
+  }
+  @export_name("time_buf_u16", [*]u16, true);
+  @export_name("main", fn()void);
+  @export_name("f_enable_timer", fn()void);
+  @export_name("f_memcpy_timestamps", fn()void);
+}

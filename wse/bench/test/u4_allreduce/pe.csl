@@ -1,0 +1,58 @@
+param memcpy_params;
+param c2d_params;
+param COUNT: u16;
+const step_id: local_task_id = @get_local_task_id(10);
+const sys_mod = @import_module("<memcpy/memcpy>", memcpy_params);
+const mpi_x = @import_module("<collectives_2d/pe>", .{ .dim_params = c2d_params.x });
+const mpi_y = @import_module("<collectives_2d/pe>", .{ .dim_params = c2d_params.y });
+const timestamp = @import_module("<time>");
+const Pw = @get_rectangle().width;
+const Ph = @get_rectangle().height;
+
+var v = @zeros([COUNT]f32);        // input (h2d)
+var acc = @zeros([COUNT]f32);      // row sum
+var tot = @zeros([COUNT]f32);      // global sum
+var ptr_v: [*]f32 = &v;
+var ptr_tot: [*]f32 = &tot;
+var ts0 = @zeros([timestamp.tsc_size_words]u16);
+var ts1 = @zeros([timestamp.tsc_size_words]u16);
+var time_buf_u16 = @zeros([6]u16);
+var ptr_time_buf_u16: [*]u16 = &time_buf_u16;
+var state: u16 = 0;
+
+fn main() void {
+  timestamp.get_timestamp(&ts0);
+  mpi_x.init();
+  mpi_y.init();
+  state = 1;
+  mpi_x.reduce_fadds(Pw - 1, @ptrcast([*]f32, &v), @ptrcast([*]f32, &acc), COUNT, step_id);
+}
+task step() void {
+  if (state == 1) {        // row sums at column Pw-1 -> broadcast along the row
+    state = 2;
+    mpi_x.broadcast(Pw - 1, @ptrcast([*]u32, &acc), COUNT, step_id);
+  } else if (state == 2) { // every PE has its row sum -> reduce along the column
+    state = 3;
+    mpi_y.reduce_fadds(Ph - 1, @ptrcast([*]f32, &acc), @ptrcast([*]f32, &tot), COUNT, step_id);
+  } else if (state == 3) { // global sum at row Ph-1 -> broadcast along the column
+    state = 4;
+    mpi_y.broadcast(Ph - 1, @ptrcast([*]u32, &tot), COUNT, step_id);
+  } else {
+    timestamp.get_timestamp(&ts1);
+    sys_mod.unblock_cmd_stream();
+  }
+}
+fn f_enable_timer() void { timestamp.enable_tsc(); sys_mod.unblock_cmd_stream(); }
+fn f_memcpy_timestamps() void {
+  for (@range(u16, 3)) |i| { time_buf_u16[i] = ts0[i]; time_buf_u16[3 + i] = ts1[i]; }
+  sys_mod.unblock_cmd_stream();
+}
+comptime {
+  @bind_local_task(step, step_id);
+  @export_symbol(ptr_v, "v");
+  @export_symbol(ptr_tot, "tot");
+  @export_symbol(ptr_time_buf_u16, "time_buf_u16");
+  @export_symbol(main);
+  @export_symbol(f_enable_timer);
+  @export_symbol(f_memcpy_timestamps);
+}

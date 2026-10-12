@@ -1,0 +1,207 @@
+{"P": 4, "MODE": 0, "COUNT": 196, "ROOT": 0, "total": 527, "op_only": 493, "init_max": 34, "start_skew": 0, "op_per_pe_max": 493, "tag": "P4_m0_r0_c196"}
+{"P": 4, "MODE": 1, "COUNT": 196, "ROOT": 0, "total": 531, "op_only": 497, "init_max": 34, "start_skew": 0, "op_per_pe_max": 497, "tag": "P4_m1_r0_c196"}
+{"P": 4, "MODE": 2, "COUNT": 196, "ROOT": 0, "total": 898, "op_only": 860, "init_max": 38, "start_skew": 0, "op_per_pe_max": 860, "tag": "P4_m2_r0_c196"}
+{"P": 4, "MODE": 0, "COUNT": 196, "ROOT": 2, "total": 542, "op_only": 508, "init_max": 34, "start_skew": 0, "op_per_pe_max": 508, "tag": "P4_m0_r2_c196"}
+{"P": 4, "MODE": 1, "COUNT": 196, "ROOT": 2, "total": 539, "op_only": 505, "init_max": 34, "start_skew": 0, "op_per_pe_max": 505, "tag": "P4_m1_r2_c196"}
+{"P": 4, "MODE": 2, "COUNT": 196, "ROOT": 2, "total": 921, "op_only": 883, "init_max": 38, "start_skew": 0, "op_per_pe_max": 883, "tag": "P4_m2_r2_c196"}
+{"P": 4, "MODE": 0, "COUNT": 196, "ROOT": 3, "total": 541, "op_only": 507, "init_max": 34, "start_skew": 0, "op_per_pe_max": 507, "tag": "P4_m0_r3_c196"}
+{"P": 4, "MODE": 1, "COUNT": 196, "ROOT": 3, "total": 537, "op_only": 503, "init_max": 34, "start_skew": 0, "op_per_pe_max": 503, "tag": "P4_m1_r3_c196"}
+{"P": 4, "MODE": 2, "COUNT": 196, "ROOT": 3, "total": 931, "op_only": 893, "init_max": 38, "start_skew": 0, "op_per_pe_max": 893, "tag": "P4_m2_r3_c196"}
+{"P": 8, "MODE": 0, "COUNT": 196, "ROOT": 0, "total": 527, "op_only": 493, "init_max": 34, "start_skew": 0, "op_per_pe_max": 493, "tag": "P8_m0_r0_c196"}
+{"P": 8, "MODE": 1, "COUNT": 196, "ROOT": 0, "total": 541, "op_only": 507, "init_max": 34, "start_skew": 0, "op_per_pe_max": 507, "tag": "P8_m1_r0_c196"}
+{"P": 8, "MODE": 2, "COUNT": 196, "ROOT": 0, "total": 898, "op_only": 860, "init_max": 38, "start_skew": 0, "op_per_pe_max": 860, "tag": "P8_m2_r0_c196"}
+{"P": 8, "MODE": 0, "COUNT": 196, "ROOT": 4, "total": 551, "op_only": 517, "init_max": 34, "start_skew": 0, "op_per_pe_max": 517, "tag": "P8_m0_r4_c196"}
+{"P": 8, "MODE": 1, "COUNT": 196, "ROOT": 4, "total": 540, "op_only": 506, "init_max": 34, "start_skew": 0, "op_per_pe_max": 506, "tag": "P8_m1_r4_c196"}
+{"P": 8, "MODE": 2, "COUNT": 196, "ROOT": 4, "total": 942, "op_only": 904, "init_max": 38, "start_skew": 0, "op_per_pe_max": 904, "tag": "P8_m2_r4_c196"}
+{"P": 8, "MODE": 0, "COUNT": 196, "ROOT": 7, "total": 557, "op_only": 523, "init_max": 34, "start_skew": 0, "op_per_pe_max": 523, "tag": "P8_m0_r7_c196"}
+{"P": 8, "MODE": 1, "COUNT": 196, "ROOT": 7, "total": 543, "op_only": 509, "init_max": 34, "start_skew": 0, "op_per_pe_max": 509, "tag": "P8_m1_r7_c196"}
+{"P": 8, "MODE": 2, "COUNT": 196, "ROOT": 7, "total": 953, "op_only": 915, "init_max": 38, "start_skew": 0, "op_per_pe_max": 915, "tag": "P8_m2_r7_c196"}
+{"P": 16, "MODE": 0, "COUNT": 196, "ROOT": 0, "total": 528, "op_only": 494, "init_max": 34, "start_skew": 0, "op_per_pe_max": 494, "tag": "P16_m0_r0_c196"}
+{"P": 16, "MODE": 1, "COUNT": 196, "ROOT": 0, "total": 562, "op_only": 528, "init_max": 34, "start_skew": 0, "op_per_pe_max": 528, "tag": "P16_m1_r0_c196"}
+{"P": 16, "MODE": 2, "COUNT": 196, "ROOT": 0, "total": 899, "op_only": 861, "init_max": 38, "start_skew": 0, "op_per_pe_max": 861, "tag": "P16_m2_r0_c196"}
+{"P": 16, "MODE": 0, "COUNT": 196, "ROOT": 8, "total": 568, "op_only": 534, "init_max": 34, "start_skew": 0, "op_per_pe_max": 534, "tag": "P16_m0_r8_c196"}
+{"P": 16, "MODE": 1, "COUNT": 196, "ROOT": 8, "total": 549, "op_only": 515, "init_max": 34, "start_skew": 0, "op_per_pe_max": 515, "tag": "P16_m1_r8_c196"}
+{"P": 16, "MODE": 2, "COUNT": 196, "ROOT": 8, "total": 968, "op_only": 930, "init_max": 38, "start_skew": 0, "op_per_pe_max": 930, "tag": "P16_m2_r8_c196"}
+{"P": 16, "MODE": 0, "COUNT": 196, "ROOT": 15, "total": 589, "op_only": 555, "init_max": 34, "start_skew": 0, "op_per_pe_max": 555, "tag": "P16_m0_r15_c196"}
+{"P": 16, "MODE": 1, "COUNT": 196, "ROOT": 15, "total": 555, "op_only": 521, "init_max": 34, "start_skew": 0, "op_per_pe_max": 521, "tag": "P16_m1_r15_c196"}
+{"P": 16, "MODE": 2, "COUNT": 196, "ROOT": 15, "total": 981, "op_only": 943, "init_max": 38, "start_skew": 0, "op_per_pe_max": 943, "tag": "P16_m2_r15_c196"}
+{"P": 4, "MODE": 0, "COUNT": 1, "ROOT": 0, "total": 331, "op_only": 297, "init_max": 34, "start_skew": 0, "op_per_pe_max": 297, "tag": "P4_m0_r0_c1"}
+{"P": 4, "MODE": 0, "COUNT": 16, "ROOT": 0, "total": 346, "op_only": 312, "init_max": 34, "start_skew": 0, "op_per_pe_max": 312, "tag": "P4_m0_r0_c16"}
+{"P": 4, "MODE": 0, "COUNT": 64, "ROOT": 0, "total": 394, "op_only": 360, "init_max": 34, "start_skew": 0, "op_per_pe_max": 360, "tag": "P4_m0_r0_c64"}
+{"P": 4, "MODE": 0, "COUNT": 512, "ROOT": 0, "total": 843, "op_only": 809, "init_max": 34, "start_skew": 0, "op_per_pe_max": 809, "tag": "P4_m0_r0_c512"}
+{"P": 4, "MODE": 1, "COUNT": 1, "ROOT": 0, "total": 336, "op_only": 302, "init_max": 34, "start_skew": 0, "op_per_pe_max": 302, "tag": "P4_m1_r0_c1"}
+{"P": 4, "MODE": 1, "COUNT": 16, "ROOT": 0, "total": 351, "op_only": 317, "init_max": 34, "start_skew": 0, "op_per_pe_max": 317, "tag": "P4_m1_r0_c16"}
+{"P": 4, "MODE": 1, "COUNT": 64, "ROOT": 0, "total": 399, "op_only": 365, "init_max": 34, "start_skew": 0, "op_per_pe_max": 365, "tag": "P4_m1_r0_c64"}
+{"P": 4, "MODE": 1, "COUNT": 512, "ROOT": 0, "total": 847, "op_only": 813, "init_max": 34, "start_skew": 0, "op_per_pe_max": 813, "tag": "P4_m1_r0_c512"}
+{"P": 4, "MODE": 2, "COUNT": 1, "ROOT": 0, "total": 589, "op_only": 551, "init_max": 38, "start_skew": 0, "op_per_pe_max": 551, "tag": "P4_m2_r0_c1"}
+{"P": 4, "MODE": 2, "COUNT": 16, "ROOT": 0, "total": 594, "op_only": 556, "init_max": 38, "start_skew": 0, "op_per_pe_max": 556, "tag": "P4_m2_r0_c16"}
+{"P": 4, "MODE": 2, "COUNT": 64, "ROOT": 0, "total": 636, "op_only": 598, "init_max": 38, "start_skew": 0, "op_per_pe_max": 598, "tag": "P4_m2_r0_c64"}
+{"P": 4, "MODE": 2, "COUNT": 512, "ROOT": 0, "total": 1530, "op_only": 1492, "init_max": 38, "start_skew": 0, "op_per_pe_max": 1492, "tag": "P4_m2_r0_c512"}
+{"P": 4, "MODE": 0, "COUNT": 1, "ROOT": 2, "total": 346, "op_only": 312, "init_max": 34, "start_skew": 0, "op_per_pe_max": 312, "tag": "P4_m0_r2_c1"}
+{"P": 4, "MODE": 0, "COUNT": 16, "ROOT": 2, "total": 361, "op_only": 327, "init_max": 34, "start_skew": 0, "op_per_pe_max": 327, "tag": "P4_m0_r2_c16"}
+{"P": 4, "MODE": 0, "COUNT": 64, "ROOT": 2, "total": 409, "op_only": 375, "init_max": 34, "start_skew": 0, "op_per_pe_max": 375, "tag": "P4_m0_r2_c64"}
+{"P": 4, "MODE": 0, "COUNT": 512, "ROOT": 2, "total": 858, "op_only": 824, "init_max": 34, "start_skew": 0, "op_per_pe_max": 824, "tag": "P4_m0_r2_c512"}
+{"P": 4, "MODE": 1, "COUNT": 1, "ROOT": 2, "total": 344, "op_only": 310, "init_max": 34, "start_skew": 0, "op_per_pe_max": 310, "tag": "P4_m1_r2_c1"}
+{"P": 4, "MODE": 1, "COUNT": 16, "ROOT": 2, "total": 359, "op_only": 325, "init_max": 34, "start_skew": 0, "op_per_pe_max": 325, "tag": "P4_m1_r2_c16"}
+{"P": 4, "MODE": 1, "COUNT": 64, "ROOT": 2, "total": 407, "op_only": 373, "init_max": 34, "start_skew": 0, "op_per_pe_max": 373, "tag": "P4_m1_r2_c64"}
+{"P": 4, "MODE": 1, "COUNT": 512, "ROOT": 2, "total": 855, "op_only": 821, "init_max": 34, "start_skew": 0, "op_per_pe_max": 821, "tag": "P4_m1_r2_c512"}
+{"P": 4, "MODE": 2, "COUNT": 1, "ROOT": 2, "total": 599, "op_only": 561, "init_max": 38, "start_skew": 0, "op_per_pe_max": 561, "tag": "P4_m2_r2_c1"}
+{"P": 4, "MODE": 2, "COUNT": 16, "ROOT": 2, "total": 604, "op_only": 566, "init_max": 38, "start_skew": 0, "op_per_pe_max": 566, "tag": "P4_m2_r2_c16"}
+{"P": 4, "MODE": 2, "COUNT": 64, "ROOT": 2, "total": 657, "op_only": 619, "init_max": 38, "start_skew": 0, "op_per_pe_max": 619, "tag": "P4_m2_r2_c64"}
+{"P": 4, "MODE": 2, "COUNT": 512, "ROOT": 2, "total": 1553, "op_only": 1515, "init_max": 38, "start_skew": 0, "op_per_pe_max": 1515, "tag": "P4_m2_r2_c512"}
+{"P": 8, "MODE": 0, "COUNT": 1, "ROOT": 0, "total": 331, "op_only": 297, "init_max": 34, "start_skew": 0, "op_per_pe_max": 297, "tag": "P8_m0_r0_c1"}
+{"P": 8, "MODE": 0, "COUNT": 16, "ROOT": 0, "total": 346, "op_only": 312, "init_max": 34, "start_skew": 0, "op_per_pe_max": 312, "tag": "P8_m0_r0_c16"}
+{"P": 8, "MODE": 0, "COUNT": 64, "ROOT": 0, "total": 394, "op_only": 360, "init_max": 34, "start_skew": 0, "op_per_pe_max": 360, "tag": "P8_m0_r0_c64"}
+{"P": 8, "MODE": 0, "COUNT": 512, "ROOT": 0, "total": 843, "op_only": 809, "init_max": 34, "start_skew": 0, "op_per_pe_max": 809, "tag": "P8_m0_r0_c512"}
+{"P": 8, "MODE": 1, "COUNT": 1, "ROOT": 0, "total": 346, "op_only": 312, "init_max": 34, "start_skew": 0, "op_per_pe_max": 312, "tag": "P8_m1_r0_c1"}
+{"P": 8, "MODE": 1, "COUNT": 16, "ROOT": 0, "total": 361, "op_only": 327, "init_max": 34, "start_skew": 0, "op_per_pe_max": 327, "tag": "P8_m1_r0_c16"}
+{"P": 8, "MODE": 1, "COUNT": 64, "ROOT": 0, "total": 409, "op_only": 375, "init_max": 34, "start_skew": 0, "op_per_pe_max": 375, "tag": "P8_m1_r0_c64"}
+{"P": 8, "MODE": 1, "COUNT": 512, "ROOT": 0, "total": 857, "op_only": 823, "init_max": 34, "start_skew": 0, "op_per_pe_max": 823, "tag": "P8_m1_r0_c512"}
+{"P": 8, "MODE": 2, "COUNT": 1, "ROOT": 0, "total": 589, "op_only": 551, "init_max": 38, "start_skew": 0, "op_per_pe_max": 551, "tag": "P8_m2_r0_c1"}
+{"P": 8, "MODE": 2, "COUNT": 16, "ROOT": 0, "total": 594, "op_only": 556, "init_max": 38, "start_skew": 0, "op_per_pe_max": 556, "tag": "P8_m2_r0_c16"}
+{"P": 8, "MODE": 2, "COUNT": 64, "ROOT": 0, "total": 636, "op_only": 598, "init_max": 38, "start_skew": 0, "op_per_pe_max": 598, "tag": "P8_m2_r0_c64"}
+{"P": 8, "MODE": 2, "COUNT": 512, "ROOT": 0, "total": 1530, "op_only": 1492, "init_max": 38, "start_skew": 0, "op_per_pe_max": 1492, "tag": "P8_m2_r0_c512"}
+{"P": 8, "MODE": 0, "COUNT": 1, "ROOT": 4, "total": 354, "op_only": 320, "init_max": 34, "start_skew": 0, "op_per_pe_max": 320, "tag": "P8_m0_r4_c1"}
+{"P": 8, "MODE": 0, "COUNT": 16, "ROOT": 4, "total": 369, "op_only": 335, "init_max": 34, "start_skew": 0, "op_per_pe_max": 335, "tag": "P8_m0_r4_c16"}
+{"P": 8, "MODE": 0, "COUNT": 64, "ROOT": 4, "total": 417, "op_only": 383, "init_max": 34, "start_skew": 0, "op_per_pe_max": 383, "tag": "P8_m0_r4_c64"}
+{"P": 8, "MODE": 0, "COUNT": 512, "ROOT": 4, "total": 867, "op_only": 833, "init_max": 34, "start_skew": 0, "op_per_pe_max": 833, "tag": "P8_m0_r4_c512"}
+{"P": 8, "MODE": 1, "COUNT": 1, "ROOT": 4, "total": 344, "op_only": 310, "init_max": 34, "start_skew": 0, "op_per_pe_max": 310, "tag": "P8_m1_r4_c1"}
+{"P": 8, "MODE": 1, "COUNT": 16, "ROOT": 4, "total": 359, "op_only": 325, "init_max": 34, "start_skew": 0, "op_per_pe_max": 325, "tag": "P8_m1_r4_c16"}
+{"P": 8, "MODE": 1, "COUNT": 64, "ROOT": 4, "total": 407, "op_only": 373, "init_max": 34, "start_skew": 0, "op_per_pe_max": 373, "tag": "P8_m1_r4_c64"}
+{"P": 8, "MODE": 1, "COUNT": 512, "ROOT": 4, "total": 856, "op_only": 822, "init_max": 34, "start_skew": 0, "op_per_pe_max": 822, "tag": "P8_m1_r4_c512"}
+{"P": 8, "MODE": 2, "COUNT": 1, "ROOT": 4, "total": 600, "op_only": 562, "init_max": 38, "start_skew": 0, "op_per_pe_max": 562, "tag": "P8_m2_r4_c1"}
+{"P": 8, "MODE": 2, "COUNT": 16, "ROOT": 4, "total": 606, "op_only": 568, "init_max": 38, "start_skew": 0, "op_per_pe_max": 568, "tag": "P8_m2_r4_c16"}
+{"P": 8, "MODE": 2, "COUNT": 64, "ROOT": 4, "total": 680, "op_only": 642, "init_max": 38, "start_skew": 0, "op_per_pe_max": 642, "tag": "P8_m2_r4_c64"}
+{"P": 8, "MODE": 2, "COUNT": 512, "ROOT": 4, "total": 1574, "op_only": 1536, "init_max": 38, "start_skew": 0, "op_per_pe_max": 1536, "tag": "P8_m2_r4_c512"}
+{"P": 16, "MODE": 0, "COUNT": 1, "ROOT": 0, "total": 332, "op_only": 298, "init_max": 34, "start_skew": 0, "op_per_pe_max": 298, "tag": "P16_m0_r0_c1"}
+{"P": 16, "MODE": 0, "COUNT": 16, "ROOT": 0, "total": 347, "op_only": 313, "init_max": 34, "start_skew": 0, "op_per_pe_max": 313, "tag": "P16_m0_r0_c16"}
+{"P": 16, "MODE": 0, "COUNT": 64, "ROOT": 0, "total": 395, "op_only": 361, "init_max": 34, "start_skew": 0, "op_per_pe_max": 361, "tag": "P16_m0_r0_c64"}
+{"P": 16, "MODE": 0, "COUNT": 512, "ROOT": 0, "total": 844, "op_only": 810, "init_max": 34, "start_skew": 0, "op_per_pe_max": 810, "tag": "P16_m0_r0_c512"}
+{"P": 16, "MODE": 1, "COUNT": 1, "ROOT": 0, "total": 367, "op_only": 333, "init_max": 34, "start_skew": 0, "op_per_pe_max": 333, "tag": "P16_m1_r0_c1"}
+{"P": 16, "MODE": 1, "COUNT": 16, "ROOT": 0, "total": 382, "op_only": 348, "init_max": 34, "start_skew": 0, "op_per_pe_max": 348, "tag": "P16_m1_r0_c16"}
+{"P": 16, "MODE": 1, "COUNT": 64, "ROOT": 0, "total": 430, "op_only": 396, "init_max": 34, "start_skew": 0, "op_per_pe_max": 396, "tag": "P16_m1_r0_c64"}
+{"P": 16, "MODE": 1, "COUNT": 512, "ROOT": 0, "total": 878, "op_only": 844, "init_max": 34, "start_skew": 0, "op_per_pe_max": 844, "tag": "P16_m1_r0_c512"}
+{"P": 16, "MODE": 2, "COUNT": 1, "ROOT": 0, "total": 590, "op_only": 552, "init_max": 38, "start_skew": 0, "op_per_pe_max": 552, "tag": "P16_m2_r0_c1"}
+{"P": 16, "MODE": 2, "COUNT": 16, "ROOT": 0, "total": 595, "op_only": 557, "init_max": 38, "start_skew": 0, "op_per_pe_max": 557, "tag": "P16_m2_r0_c16"}
+{"P": 16, "MODE": 2, "COUNT": 64, "ROOT": 0, "total": 637, "op_only": 599, "init_max": 38, "start_skew": 0, "op_per_pe_max": 599, "tag": "P16_m2_r0_c64"}
+{"P": 16, "MODE": 2, "COUNT": 512, "ROOT": 0, "total": 1531, "op_only": 1493, "init_max": 38, "start_skew": 0, "op_per_pe_max": 1493, "tag": "P16_m2_r0_c512"}
+{"P": 16, "MODE": 0, "COUNT": 1, "ROOT": 8, "total": 371, "op_only": 337, "init_max": 34, "start_skew": 0, "op_per_pe_max": 337, "tag": "P16_m0_r8_c1"}
+{"P": 16, "MODE": 0, "COUNT": 16, "ROOT": 8, "total": 386, "op_only": 352, "init_max": 34, "start_skew": 0, "op_per_pe_max": 352, "tag": "P16_m0_r8_c16"}
+{"P": 16, "MODE": 0, "COUNT": 64, "ROOT": 8, "total": 434, "op_only": 400, "init_max": 34, "start_skew": 0, "op_per_pe_max": 400, "tag": "P16_m0_r8_c64"}
+{"P": 16, "MODE": 0, "COUNT": 512, "ROOT": 8, "total": 884, "op_only": 850, "init_max": 34, "start_skew": 0, "op_per_pe_max": 850, "tag": "P16_m0_r8_c512"}
+{"P": 16, "MODE": 1, "COUNT": 1, "ROOT": 8, "total": 354, "op_only": 320, "init_max": 34, "start_skew": 0, "op_per_pe_max": 320, "tag": "P16_m1_r8_c1"}
+{"P": 16, "MODE": 1, "COUNT": 16, "ROOT": 8, "total": 369, "op_only": 335, "init_max": 34, "start_skew": 0, "op_per_pe_max": 335, "tag": "P16_m1_r8_c16"}
+{"P": 16, "MODE": 1, "COUNT": 64, "ROOT": 8, "total": 417, "op_only": 383, "init_max": 34, "start_skew": 0, "op_per_pe_max": 383, "tag": "P16_m1_r8_c64"}
+{"P": 16, "MODE": 1, "COUNT": 512, "ROOT": 8, "total": 865, "op_only": 831, "init_max": 34, "start_skew": 0, "op_per_pe_max": 831, "tag": "P16_m1_r8_c512"}
+{"P": 16, "MODE": 2, "COUNT": 1, "ROOT": 8, "total": 612, "op_only": 574, "init_max": 38, "start_skew": 0, "op_per_pe_max": 574, "tag": "P16_m2_r8_c1"}
+{"P": 16, "MODE": 2, "COUNT": 16, "ROOT": 8, "total": 622, "op_only": 584, "init_max": 38, "start_skew": 0, "op_per_pe_max": 584, "tag": "P16_m2_r8_c16"}
+{"P": 16, "MODE": 2, "COUNT": 64, "ROOT": 8, "total": 706, "op_only": 668, "init_max": 38, "start_skew": 0, "op_per_pe_max": 668, "tag": "P16_m2_r8_c64"}
+{"P": 16, "MODE": 2, "COUNT": 512, "ROOT": 8, "total": 1600, "op_only": 1562, "init_max": 38, "start_skew": 0, "op_per_pe_max": 1562, "tag": "P16_m2_r8_c512"}
+{"P": 4, "MODE": 0, "COUNT": 2, "ROOT": 0, "COUNTY": 2, "total": 332, "op_only": 298, "init_max": 34, "start_skew": 0, "op_per_pe_max": 298, "tag": "P4_m0_r0_c2"}
+{"P": 4, "MODE": 1, "COUNT": 2, "ROOT": 0, "COUNTY": 2, "total": 337, "op_only": 303, "init_max": 34, "start_skew": 0, "op_per_pe_max": 303, "tag": "P4_m1_r0_c2"}
+{"P": 4, "MODE": 2, "COUNT": 2, "ROOT": 0, "COUNTY": 2, "total": 589, "op_only": 551, "init_max": 38, "start_skew": 0, "op_per_pe_max": 551, "tag": "P4_m2_r0_c2"}
+{"P": 4, "MODE": 0, "COUNT": 4, "ROOT": 0, "COUNTY": 4, "total": 332, "op_only": 298, "init_max": 34, "start_skew": 0, "op_per_pe_max": 298, "tag": "P4_m0_r0_c4"}
+{"P": 4, "MODE": 1, "COUNT": 4, "ROOT": 0, "COUNTY": 4, "total": 337, "op_only": 303, "init_max": 34, "start_skew": 0, "op_per_pe_max": 303, "tag": "P4_m1_r0_c4"}
+{"P": 4, "MODE": 2, "COUNT": 4, "ROOT": 0, "COUNTY": 4, "total": 590, "op_only": 552, "init_max": 38, "start_skew": 0, "op_per_pe_max": 552, "tag": "P4_m2_r0_c4"}
+{"P": 4, "MODE": 0, "COUNT": 8, "ROOT": 0, "COUNTY": 8, "total": 333, "op_only": 299, "init_max": 34, "start_skew": 0, "op_per_pe_max": 299, "tag": "P4_m0_r0_c8"}
+{"P": 4, "MODE": 1, "COUNT": 8, "ROOT": 0, "COUNTY": 8, "total": 338, "op_only": 304, "init_max": 34, "start_skew": 0, "op_per_pe_max": 304, "tag": "P4_m1_r0_c8"}
+{"P": 4, "MODE": 2, "COUNT": 8, "ROOT": 0, "COUNTY": 8, "total": 590, "op_only": 552, "init_max": 38, "start_skew": 0, "op_per_pe_max": 552, "tag": "P4_m2_r0_c8"}
+{"P": 4, "MODE": 0, "COUNT": 32, "ROOT": 0, "COUNTY": 32, "total": 362, "op_only": 328, "init_max": 34, "start_skew": 0, "op_per_pe_max": 328, "tag": "P4_m0_r0_c32"}
+{"P": 4, "MODE": 1, "COUNT": 32, "ROOT": 0, "COUNTY": 32, "total": 367, "op_only": 333, "init_max": 34, "start_skew": 0, "op_per_pe_max": 333, "tag": "P4_m1_r0_c32"}
+{"P": 4, "MODE": 2, "COUNT": 32, "ROOT": 0, "COUNTY": 32, "total": 603, "op_only": 565, "init_max": 38, "start_skew": 0, "op_per_pe_max": 565, "tag": "P4_m2_r0_c32"}
+{"P": 4, "MODE": 2, "COUNT": 64, "ROOT": 0, "COUNTY": 128, "total": 672, "op_only": 634, "init_max": 38, "start_skew": 0, "op_per_pe_max": 634, "tag": "P4_m2_r0_c64_y128"}
+{"P": 4, "MODE": 2, "COUNT": 128, "ROOT": 0, "COUNTY": 64, "total": 730, "op_only": 692, "init_max": 38, "start_skew": 0, "op_per_pe_max": 692, "tag": "P4_m2_r0_c128_y64"}
+{"P": 4, "MODE": 2, "COUNT": 4, "ROOT": 0, "COUNTY": 16, "total": 593, "op_only": 555, "init_max": 38, "start_skew": 0, "op_per_pe_max": 555, "tag": "P4_m2_r0_c4_y16"}
+{"P": 4, "MODE": 2, "COUNT": 16, "ROOT": 0, "COUNTY": 4, "total": 593, "op_only": 555, "init_max": 38, "start_skew": 0, "op_per_pe_max": 555, "tag": "P4_m2_r0_c16_y4"}
+{"P": 4, "MODE": 0, "COUNT": 128, "ROOT": 0, "COUNTY": 128, "total": 458, "op_only": 424, "init_max": 34, "start_skew": 0, "op_per_pe_max": 424, "tag": "P4_m0_r0_c128"}
+{"P": 4, "MODE": 1, "COUNT": 128, "ROOT": 0, "COUNTY": 128, "total": 463, "op_only": 429, "init_max": 34, "start_skew": 0, "op_per_pe_max": 429, "tag": "P4_m1_r0_c128"}
+{"P": 4, "MODE": 0, "COUNT": 2, "ROOT": 2, "COUNTY": 2, "total": 346, "op_only": 312, "init_max": 34, "start_skew": 0, "op_per_pe_max": 312, "tag": "P4_m0_r2_c2"}
+{"P": 4, "MODE": 1, "COUNT": 2, "ROOT": 2, "COUNTY": 2, "total": 344, "op_only": 310, "init_max": 34, "start_skew": 0, "op_per_pe_max": 310, "tag": "P4_m1_r2_c2"}
+{"P": 4, "MODE": 2, "COUNT": 2, "ROOT": 2, "COUNTY": 2, "total": 599, "op_only": 561, "init_max": 38, "start_skew": 0, "op_per_pe_max": 561, "tag": "P4_m2_r2_c2"}
+{"P": 4, "MODE": 0, "COUNT": 4, "ROOT": 2, "COUNTY": 4, "total": 347, "op_only": 313, "init_max": 34, "start_skew": 0, "op_per_pe_max": 313, "tag": "P4_m0_r2_c4"}
+{"P": 4, "MODE": 1, "COUNT": 4, "ROOT": 2, "COUNTY": 4, "total": 345, "op_only": 311, "init_max": 34, "start_skew": 0, "op_per_pe_max": 311, "tag": "P4_m1_r2_c4"}
+{"P": 4, "MODE": 2, "COUNT": 4, "ROOT": 2, "COUNTY": 4, "total": 600, "op_only": 562, "init_max": 38, "start_skew": 0, "op_per_pe_max": 562, "tag": "P4_m2_r2_c4"}
+{"P": 4, "MODE": 0, "COUNT": 8, "ROOT": 2, "COUNTY": 8, "total": 348, "op_only": 314, "init_max": 34, "start_skew": 0, "op_per_pe_max": 314, "tag": "P4_m0_r2_c8"}
+{"P": 4, "MODE": 1, "COUNT": 8, "ROOT": 2, "COUNTY": 8, "total": 346, "op_only": 312, "init_max": 34, "start_skew": 0, "op_per_pe_max": 312, "tag": "P4_m1_r2_c8"}
+{"P": 4, "MODE": 2, "COUNT": 8, "ROOT": 2, "COUNTY": 8, "total": 600, "op_only": 562, "init_max": 38, "start_skew": 0, "op_per_pe_max": 562, "tag": "P4_m2_r2_c8"}
+{"P": 4, "MODE": 0, "COUNT": 32, "ROOT": 2, "COUNTY": 32, "total": 377, "op_only": 343, "init_max": 34, "start_skew": 0, "op_per_pe_max": 343, "tag": "P4_m0_r2_c32"}
+{"P": 4, "MODE": 1, "COUNT": 32, "ROOT": 2, "COUNTY": 32, "total": 375, "op_only": 341, "init_max": 34, "start_skew": 0, "op_per_pe_max": 341, "tag": "P4_m1_r2_c32"}
+{"P": 4, "MODE": 2, "COUNT": 32, "ROOT": 2, "COUNTY": 32, "total": 616, "op_only": 578, "init_max": 38, "start_skew": 0, "op_per_pe_max": 578, "tag": "P4_m2_r2_c32"}
+{"P": 4, "MODE": 2, "COUNT": 64, "ROOT": 2, "COUNTY": 128, "total": 694, "op_only": 656, "init_max": 38, "start_skew": 0, "op_per_pe_max": 656, "tag": "P4_m2_r2_c64_y128"}
+{"P": 4, "MODE": 2, "COUNT": 128, "ROOT": 2, "COUNTY": 64, "total": 742, "op_only": 704, "init_max": 38, "start_skew": 0, "op_per_pe_max": 704, "tag": "P4_m2_r2_c128_y64"}
+{"P": 4, "MODE": 2, "COUNT": 4, "ROOT": 2, "COUNTY": 16, "total": 603, "op_only": 565, "init_max": 38, "start_skew": 0, "op_per_pe_max": 565, "tag": "P4_m2_r2_c4_y16"}
+{"P": 4, "MODE": 2, "COUNT": 16, "ROOT": 2, "COUNTY": 4, "total": 603, "op_only": 565, "init_max": 38, "start_skew": 0, "op_per_pe_max": 565, "tag": "P4_m2_r2_c16_y4"}
+{"P": 4, "MODE": 0, "COUNT": 128, "ROOT": 2, "COUNTY": 128, "total": 473, "op_only": 439, "init_max": 34, "start_skew": 0, "op_per_pe_max": 439, "tag": "P4_m0_r2_c128"}
+{"P": 4, "MODE": 1, "COUNT": 128, "ROOT": 2, "COUNTY": 128, "total": 471, "op_only": 437, "init_max": 34, "start_skew": 0, "op_per_pe_max": 437, "tag": "P4_m1_r2_c128"}
+{"P": 8, "MODE": 0, "COUNT": 2, "ROOT": 0, "COUNTY": 2, "total": 332, "op_only": 298, "init_max": 34, "start_skew": 0, "op_per_pe_max": 298, "tag": "P8_m0_r0_c2"}
+{"P": 8, "MODE": 1, "COUNT": 2, "ROOT": 0, "COUNTY": 2, "total": 347, "op_only": 313, "init_max": 34, "start_skew": 0, "op_per_pe_max": 313, "tag": "P8_m1_r0_c2"}
+{"P": 8, "MODE": 2, "COUNT": 2, "ROOT": 0, "COUNTY": 2, "total": 589, "op_only": 551, "init_max": 38, "start_skew": 0, "op_per_pe_max": 551, "tag": "P8_m2_r0_c2"}
+{"P": 8, "MODE": 0, "COUNT": 4, "ROOT": 0, "COUNTY": 4, "total": 332, "op_only": 298, "init_max": 34, "start_skew": 0, "op_per_pe_max": 298, "tag": "P8_m0_r0_c4"}
+{"P": 8, "MODE": 1, "COUNT": 4, "ROOT": 0, "COUNTY": 4, "total": 347, "op_only": 313, "init_max": 34, "start_skew": 0, "op_per_pe_max": 313, "tag": "P8_m1_r0_c4"}
+{"P": 8, "MODE": 2, "COUNT": 4, "ROOT": 0, "COUNTY": 4, "total": 590, "op_only": 552, "init_max": 38, "start_skew": 0, "op_per_pe_max": 552, "tag": "P8_m2_r0_c4"}
+{"P": 8, "MODE": 0, "COUNT": 8, "ROOT": 0, "COUNTY": 8, "total": 333, "op_only": 299, "init_max": 34, "start_skew": 0, "op_per_pe_max": 299, "tag": "P8_m0_r0_c8"}
+{"P": 8, "MODE": 1, "COUNT": 8, "ROOT": 0, "COUNTY": 8, "total": 348, "op_only": 314, "init_max": 34, "start_skew": 0, "op_per_pe_max": 314, "tag": "P8_m1_r0_c8"}
+{"P": 8, "MODE": 2, "COUNT": 8, "ROOT": 0, "COUNTY": 8, "total": 590, "op_only": 552, "init_max": 38, "start_skew": 0, "op_per_pe_max": 552, "tag": "P8_m2_r0_c8"}
+{"P": 8, "MODE": 0, "COUNT": 32, "ROOT": 0, "COUNTY": 32, "total": 362, "op_only": 328, "init_max": 34, "start_skew": 0, "op_per_pe_max": 328, "tag": "P8_m0_r0_c32"}
+{"P": 8, "MODE": 1, "COUNT": 32, "ROOT": 0, "COUNTY": 32, "total": 377, "op_only": 343, "init_max": 34, "start_skew": 0, "op_per_pe_max": 343, "tag": "P8_m1_r0_c32"}
+{"P": 8, "MODE": 2, "COUNT": 32, "ROOT": 0, "COUNTY": 32, "total": 603, "op_only": 565, "init_max": 38, "start_skew": 0, "op_per_pe_max": 565, "tag": "P8_m2_r0_c32"}
+{"P": 8, "MODE": 2, "COUNT": 64, "ROOT": 0, "COUNTY": 128, "total": 682, "op_only": 644, "init_max": 38, "start_skew": 0, "op_per_pe_max": 644, "tag": "P8_m2_r0_c64_y128"}
+{"P": 8, "MODE": 2, "COUNT": 128, "ROOT": 0, "COUNTY": 64, "total": 730, "op_only": 692, "init_max": 38, "start_skew": 0, "op_per_pe_max": 692, "tag": "P8_m2_r0_c128_y64"}
+{"P": 8, "MODE": 2, "COUNT": 4, "ROOT": 0, "COUNTY": 16, "total": 593, "op_only": 555, "init_max": 38, "start_skew": 0, "op_per_pe_max": 555, "tag": "P8_m2_r0_c4_y16"}
+{"P": 8, "MODE": 2, "COUNT": 16, "ROOT": 0, "COUNTY": 4, "total": 593, "op_only": 555, "init_max": 38, "start_skew": 0, "op_per_pe_max": 555, "tag": "P8_m2_r0_c16_y4"}
+{"P": 8, "MODE": 0, "COUNT": 128, "ROOT": 0, "COUNTY": 128, "total": 458, "op_only": 424, "init_max": 34, "start_skew": 0, "op_per_pe_max": 424, "tag": "P8_m0_r0_c128"}
+{"P": 8, "MODE": 1, "COUNT": 128, "ROOT": 0, "COUNTY": 128, "total": 473, "op_only": 439, "init_max": 34, "start_skew": 0, "op_per_pe_max": 439, "tag": "P8_m1_r0_c128"}
+{"P": 8, "MODE": 0, "COUNT": 2, "ROOT": 4, "COUNTY": 2, "total": 355, "op_only": 321, "init_max": 34, "start_skew": 0, "op_per_pe_max": 321, "tag": "P8_m0_r4_c2"}
+{"P": 8, "MODE": 1, "COUNT": 2, "ROOT": 4, "COUNTY": 2, "total": 345, "op_only": 311, "init_max": 34, "start_skew": 0, "op_per_pe_max": 311, "tag": "P8_m1_r4_c2"}
+{"P": 8, "MODE": 2, "COUNT": 2, "ROOT": 4, "COUNTY": 2, "total": 600, "op_only": 562, "init_max": 38, "start_skew": 0, "op_per_pe_max": 562, "tag": "P8_m2_r4_c2"}
+{"P": 8, "MODE": 0, "COUNT": 4, "ROOT": 4, "COUNTY": 4, "total": 354, "op_only": 320, "init_max": 34, "start_skew": 0, "op_per_pe_max": 320, "tag": "P8_m0_r4_c4"}
+{"P": 8, "MODE": 1, "COUNT": 4, "ROOT": 4, "COUNTY": 4, "total": 344, "op_only": 310, "init_max": 34, "start_skew": 0, "op_per_pe_max": 310, "tag": "P8_m1_r4_c4"}
+{"P": 8, "MODE": 2, "COUNT": 4, "ROOT": 4, "COUNTY": 4, "total": 600, "op_only": 562, "init_max": 38, "start_skew": 0, "op_per_pe_max": 562, "tag": "P8_m2_r4_c4"}
+{"P": 8, "MODE": 0, "COUNT": 8, "ROOT": 4, "COUNTY": 8, "total": 356, "op_only": 322, "init_max": 34, "start_skew": 0, "op_per_pe_max": 322, "tag": "P8_m0_r4_c8"}
+{"P": 8, "MODE": 1, "COUNT": 8, "ROOT": 4, "COUNTY": 8, "total": 346, "op_only": 312, "init_max": 34, "start_skew": 0, "op_per_pe_max": 312, "tag": "P8_m1_r4_c8"}
+{"P": 8, "MODE": 2, "COUNT": 8, "ROOT": 4, "COUNTY": 8, "total": 601, "op_only": 563, "init_max": 38, "start_skew": 0, "op_per_pe_max": 563, "tag": "P8_m2_r4_c8"}
+{"P": 8, "MODE": 0, "COUNT": 32, "ROOT": 4, "COUNTY": 32, "total": 385, "op_only": 351, "init_max": 34, "start_skew": 0, "op_per_pe_max": 351, "tag": "P8_m0_r4_c32"}
+{"P": 8, "MODE": 1, "COUNT": 32, "ROOT": 4, "COUNTY": 32, "total": 375, "op_only": 341, "init_max": 34, "start_skew": 0, "op_per_pe_max": 341, "tag": "P8_m1_r4_c32"}
+{"P": 8, "MODE": 2, "COUNT": 32, "ROOT": 4, "COUNTY": 32, "total": 617, "op_only": 579, "init_max": 38, "start_skew": 0, "op_per_pe_max": 579, "tag": "P8_m2_r4_c32"}
+{"P": 8, "MODE": 2, "COUNT": 64, "ROOT": 4, "COUNTY": 128, "total": 704, "op_only": 666, "init_max": 38, "start_skew": 0, "op_per_pe_max": 666, "tag": "P8_m2_r4_c64_y128"}
+{"P": 8, "MODE": 2, "COUNT": 128, "ROOT": 4, "COUNTY": 64, "total": 743, "op_only": 705, "init_max": 38, "start_skew": 0, "op_per_pe_max": 705, "tag": "P8_m2_r4_c128_y64"}
+{"P": 8, "MODE": 2, "COUNT": 4, "ROOT": 4, "COUNTY": 16, "total": 603, "op_only": 565, "init_max": 38, "start_skew": 0, "op_per_pe_max": 565, "tag": "P8_m2_r4_c4_y16"}
+{"P": 8, "MODE": 2, "COUNT": 16, "ROOT": 4, "COUNTY": 4, "total": 603, "op_only": 565, "init_max": 38, "start_skew": 0, "op_per_pe_max": 565, "tag": "P8_m2_r4_c16_y4"}
+{"P": 8, "MODE": 0, "COUNT": 128, "ROOT": 4, "COUNTY": 128, "total": 481, "op_only": 447, "init_max": 34, "start_skew": 0, "op_per_pe_max": 447, "tag": "P8_m0_r4_c128"}
+{"P": 8, "MODE": 1, "COUNT": 128, "ROOT": 4, "COUNTY": 128, "total": 471, "op_only": 437, "init_max": 34, "start_skew": 0, "op_per_pe_max": 437, "tag": "P8_m1_r4_c128"}
+{"P": 16, "MODE": 0, "COUNT": 2, "ROOT": 0, "COUNTY": 2, "total": 333, "op_only": 299, "init_max": 34, "start_skew": 0, "op_per_pe_max": 299, "tag": "P16_m0_r0_c2"}
+{"P": 16, "MODE": 1, "COUNT": 2, "ROOT": 0, "COUNTY": 2, "total": 368, "op_only": 334, "init_max": 34, "start_skew": 0, "op_per_pe_max": 334, "tag": "P16_m1_r0_c2"}
+{"P": 16, "MODE": 2, "COUNT": 2, "ROOT": 0, "COUNTY": 2, "total": 590, "op_only": 552, "init_max": 38, "start_skew": 0, "op_per_pe_max": 552, "tag": "P16_m2_r0_c2"}
+{"P": 16, "MODE": 0, "COUNT": 4, "ROOT": 0, "COUNTY": 4, "total": 333, "op_only": 299, "init_max": 34, "start_skew": 0, "op_per_pe_max": 299, "tag": "P16_m0_r0_c4"}
+{"P": 16, "MODE": 1, "COUNT": 4, "ROOT": 0, "COUNTY": 4, "total": 368, "op_only": 334, "init_max": 34, "start_skew": 0, "op_per_pe_max": 334, "tag": "P16_m1_r0_c4"}
+{"P": 16, "MODE": 2, "COUNT": 4, "ROOT": 0, "COUNTY": 4, "total": 591, "op_only": 553, "init_max": 38, "start_skew": 0, "op_per_pe_max": 553, "tag": "P16_m2_r0_c4"}
+{"P": 16, "MODE": 0, "COUNT": 8, "ROOT": 0, "COUNTY": 8, "total": 334, "op_only": 300, "init_max": 34, "start_skew": 0, "op_per_pe_max": 300, "tag": "P16_m0_r0_c8"}
+{"P": 16, "MODE": 1, "COUNT": 8, "ROOT": 0, "COUNTY": 8, "total": 369, "op_only": 335, "init_max": 34, "start_skew": 0, "op_per_pe_max": 335, "tag": "P16_m1_r0_c8"}
+{"P": 16, "MODE": 2, "COUNT": 8, "ROOT": 0, "COUNTY": 8, "total": 591, "op_only": 553, "init_max": 38, "start_skew": 0, "op_per_pe_max": 553, "tag": "P16_m2_r0_c8"}
+{"P": 16, "MODE": 0, "COUNT": 32, "ROOT": 0, "COUNTY": 32, "total": 363, "op_only": 329, "init_max": 34, "start_skew": 0, "op_per_pe_max": 329, "tag": "P16_m0_r0_c32"}
+{"P": 16, "MODE": 1, "COUNT": 32, "ROOT": 0, "COUNTY": 32, "total": 398, "op_only": 364, "init_max": 34, "start_skew": 0, "op_per_pe_max": 364, "tag": "P16_m1_r0_c32"}
+{"P": 16, "MODE": 2, "COUNT": 32, "ROOT": 0, "COUNTY": 32, "total": 604, "op_only": 566, "init_max": 38, "start_skew": 0, "op_per_pe_max": 566, "tag": "P16_m2_r0_c32"}
+{"P": 16, "MODE": 2, "COUNT": 64, "ROOT": 0, "COUNTY": 128, "total": 703, "op_only": 665, "init_max": 38, "start_skew": 0, "op_per_pe_max": 665, "tag": "P16_m2_r0_c64_y128"}
+{"P": 16, "MODE": 2, "COUNT": 128, "ROOT": 0, "COUNTY": 64, "total": 731, "op_only": 693, "init_max": 38, "start_skew": 0, "op_per_pe_max": 693, "tag": "P16_m2_r0_c128_y64"}
+{"P": 16, "MODE": 2, "COUNT": 4, "ROOT": 0, "COUNTY": 16, "total": 594, "op_only": 556, "init_max": 38, "start_skew": 0, "op_per_pe_max": 556, "tag": "P16_m2_r0_c4_y16"}
+{"P": 16, "MODE": 2, "COUNT": 16, "ROOT": 0, "COUNTY": 4, "total": 594, "op_only": 556, "init_max": 38, "start_skew": 0, "op_per_pe_max": 556, "tag": "P16_m2_r0_c16_y4"}
+{"P": 16, "MODE": 0, "COUNT": 128, "ROOT": 0, "COUNTY": 128, "total": 459, "op_only": 425, "init_max": 34, "start_skew": 0, "op_per_pe_max": 425, "tag": "P16_m0_r0_c128"}
+{"P": 16, "MODE": 1, "COUNT": 128, "ROOT": 0, "COUNTY": 128, "total": 494, "op_only": 460, "init_max": 34, "start_skew": 0, "op_per_pe_max": 460, "tag": "P16_m1_r0_c128"}
+{"P": 16, "MODE": 0, "COUNT": 2, "ROOT": 8, "COUNTY": 2, "total": 372, "op_only": 338, "init_max": 34, "start_skew": 0, "op_per_pe_max": 338, "tag": "P16_m0_r8_c2"}
+{"P": 16, "MODE": 1, "COUNT": 2, "ROOT": 8, "COUNTY": 2, "total": 355, "op_only": 321, "init_max": 34, "start_skew": 0, "op_per_pe_max": 321, "tag": "P16_m1_r8_c2"}
+{"P": 16, "MODE": 2, "COUNT": 2, "ROOT": 8, "COUNTY": 2, "total": 613, "op_only": 575, "init_max": 38, "start_skew": 0, "op_per_pe_max": 575, "tag": "P16_m2_r8_c2"}
+{"P": 16, "MODE": 0, "COUNT": 4, "ROOT": 8, "COUNTY": 4, "total": 372, "op_only": 338, "init_max": 34, "start_skew": 0, "op_per_pe_max": 338, "tag": "P16_m0_r8_c4"}
+{"P": 16, "MODE": 1, "COUNT": 4, "ROOT": 8, "COUNTY": 4, "total": 355, "op_only": 321, "init_max": 34, "start_skew": 0, "op_per_pe_max": 321, "tag": "P16_m1_r8_c4"}
+{"P": 16, "MODE": 2, "COUNT": 4, "ROOT": 8, "COUNTY": 4, "total": 613, "op_only": 575, "init_max": 38, "start_skew": 0, "op_per_pe_max": 575, "tag": "P16_m2_r8_c4"}
+{"P": 16, "MODE": 0, "COUNT": 8, "ROOT": 8, "COUNTY": 8, "total": 372, "op_only": 338, "init_max": 34, "start_skew": 0, "op_per_pe_max": 338, "tag": "P16_m0_r8_c8"}
+{"P": 16, "MODE": 1, "COUNT": 8, "ROOT": 8, "COUNTY": 8, "total": 355, "op_only": 321, "init_max": 34, "start_skew": 0, "op_per_pe_max": 321, "tag": "P16_m1_r8_c8"}
+{"P": 16, "MODE": 2, "COUNT": 8, "ROOT": 8, "COUNTY": 8, "total": 614, "op_only": 576, "init_max": 38, "start_skew": 0, "op_per_pe_max": 576, "tag": "P16_m2_r8_c8"}
+{"P": 16, "MODE": 0, "COUNT": 32, "ROOT": 8, "COUNTY": 32, "total": 402, "op_only": 368, "init_max": 34, "start_skew": 0, "op_per_pe_max": 368, "tag": "P16_m0_r8_c32"}
+{"P": 16, "MODE": 1, "COUNT": 32, "ROOT": 8, "COUNTY": 32, "total": 385, "op_only": 351, "init_max": 34, "start_skew": 0, "op_per_pe_max": 351, "tag": "P16_m1_r8_c32"}
+{"P": 16, "MODE": 2, "COUNT": 32, "ROOT": 8, "COUNTY": 32, "total": 637, "op_only": 599, "init_max": 38, "start_skew": 0, "op_per_pe_max": 599, "tag": "P16_m2_r8_c32"}
+{"P": 16, "MODE": 2, "COUNT": 64, "ROOT": 8, "COUNTY": 128, "total": 730, "op_only": 692, "init_max": 38, "start_skew": 0, "op_per_pe_max": 692, "tag": "P16_m2_r8_c64_y128"}
+{"P": 16, "MODE": 2, "COUNT": 128, "ROOT": 8, "COUNTY": 64, "total": 754, "op_only": 716, "init_max": 38, "start_skew": 0, "op_per_pe_max": 716, "tag": "P16_m2_r8_c128_y64"}
+{"P": 16, "MODE": 2, "COUNT": 4, "ROOT": 8, "COUNTY": 16, "total": 619, "op_only": 581, "init_max": 38, "start_skew": 0, "op_per_pe_max": 581, "tag": "P16_m2_r8_c4_y16"}
+{"P": 16, "MODE": 2, "COUNT": 16, "ROOT": 8, "COUNTY": 4, "total": 618, "op_only": 580, "init_max": 38, "start_skew": 0, "op_per_pe_max": 580, "tag": "P16_m2_r8_c16_y4"}
+{"P": 16, "MODE": 0, "COUNT": 128, "ROOT": 8, "COUNTY": 128, "total": 498, "op_only": 464, "init_max": 34, "start_skew": 0, "op_per_pe_max": 464, "tag": "P16_m0_r8_c128"}
+{"P": 16, "MODE": 1, "COUNT": 128, "ROOT": 8, "COUNTY": 128, "total": 481, "op_only": 447, "init_max": 34, "start_skew": 0, "op_per_pe_max": 447, "tag": "P16_m1_r8_c128"}

@@ -1,0 +1,34 @@
+{
+ "collbench": {
+  "n": 144,
+  "median": 0.4075404322461451,
+  "max": 2.0645161290322678,
+  "passed": true,
+  "gated": true,
+  "addendumB_median": 25.546041017773135
+ },
+ "chain": {
+  "n": 92,
+  "median": 0.9958513082428344,
+  "max": 5.882352941176472,
+  "passed": true,
+  "gated": true,
+  "addendumB_median": 29.97542817647197
+ },
+ "coll2d_single": {
+  "n": 126,
+  "median": 0.2849002849002913,
+  "max": 1.7964071856287456,
+  "passed": true,
+  "gated": true,
+  "addendumB_median": 10.015197568389056
+ },
+ "coll2d_concurrent": {
+  "n": 81,
+  "median": 2.6978417266187105,
+  "max": 8.526011560693647,
+  "passed": true,
+  "gated": false,
+  "addendumB_median": 13.848920863309356
+ }
+}

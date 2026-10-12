@@ -1,0 +1,17 @@
+# build outputs
+wse/stage1/fabsim
+wse/stage1/fabsim2
+wse/stage1/c2dsim
+wse/stage1/kersim
+*.o
+__pycache__/
+# uncompressed datasets (the committed copies are .jsonl.gz)
+wse/stage1/results/fabric_m1*.jsonl
+# SDK / simfab artefacts
+out/
+out_*/
+simfab_traces*/
+runs/
+sim_stats.json
+simconfig.json
+stamps.json

@@ -1,0 +1,5 @@
+collbench          n=144 median|e|= 0.52% max|e|=  6.72% within5%=139/144 | gate FAIL | Addendum B median 25.55% | worst reduce_P64_c1_last_x_r1 1220->1138
+chain              n= 92 median|e|= 1.04% max|e|=  5.88% within5%=88/92 | gate PASS | Addendum B median 29.98% | worst bcast-gather_P8_c8_ll_x 918->864
+coll2d_single      n=126 median|e|= 0.28% max|e|=  1.80% within5%=126/126 | gate PASS | Addendum B median 10.02% | worst P16_m1_r0_c2 334->328
+coll2d_concurrent  n= 81 median|e|= 2.70% max|e|=  8.53% within5%=65/81 | gate PASS (reported, not gated) | Addendum B median 13.85% | worst P4_m2_r0_c128_y64 692->633
+GATE ITEM 2: FAIL

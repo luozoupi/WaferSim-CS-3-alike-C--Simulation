@@ -1,0 +1,15 @@
+backpressure n= 18 median|e|= 0.00% max|e|=  0.00% within3%=18/18
+contention   n= 16 median|e|= 0.00% max|e|=  0.00% within3%=16/16
+multicast    n= 40 median|e|= 0.00% max|e|=  0.00% within3%=40/40
+relay        n= 39 median|e|= 0.00% max|e|=  0.00% within3%=39/39
+sa_chain     n=  4 median|e|= 0.70% max|e|=  3.85% within3%=3/4
+sa_ring      n=  1 median|e|= 3.39% max|e|=  3.39% within3%=0/1
+sa_rx        n=  3 median|e|= 0.99% max|e|=  1.83% within3%=3/3
+sa_tx        n=  4 median|e|= 0.29% max|e|=  0.75% within3%=4/4
+straight     n= 52 median|e|= 0.00% max|e|=  0.00% within3%=52/52
+td_line      n=  4 median|e|= 0.14% max|e|=  0.47% within3%=4/4
+turn         n= 24 median|e|= 0.00% max|e|=  0.00% within3%=24/24
+ALL          n=205 median|e|= 0.00% within3%=203/205
+GATE ITEM 1: FAIL (2 hold-out metrics outside +-3%)
+  sachain_N8_B1                last@root    simfab 26 model 25 -3.85%
+  saring_B64                   last@rx      simfab 826 model 854 +3.39%

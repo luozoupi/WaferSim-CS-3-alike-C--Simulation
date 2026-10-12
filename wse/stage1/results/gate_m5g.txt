@@ -1,0 +1,5 @@
+collbench          n=144 median|e|= 0.41% max|e|=  2.06% within5%=144/144 | gate PASS | B median 25.55% D median  0.52% | worst reduce_P4_c8_last_x_r1 775->791
+chain              n= 92 median|e|= 1.00% max|e|=  5.88% within5%=88/92 | gate PASS | B median 29.98% D median  1.04% | worst bcast-gather_P8_c8_ll_x 918->864
+coll2d_single      n=126 median|e|= 1.01% max|e|=  4.49% within5%=126/126 | gate PASS | B median 10.02% D median  0.28% | worst P16_m1_r0_c2 334->319
+coll2d_concurrent  n= 81 median|e|= 2.08% max|e|=  7.08% within5%=70/81 | gate PASS (reported, not gated) | B median 13.85% D median  2.70% | worst P4_m2_r0_c128_y64 692->643
+GATE ITEM 2: PASS

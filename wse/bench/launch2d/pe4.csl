@@ -1,0 +1,82 @@
+param memcpy_params;
+param px: u16;
+param py: u16;
+param Pw: u16;
+param Ph: u16;
+param DIR: u16;          // 0 east, 1 south, 2 west, 3 north (direction of the probe wavelet)
+param send_c: color;
+param recv_c: color;
+
+const sys_mod = @import_module("<memcpy/memcpy>", memcpy_params);
+const timestamp = @import_module("<time>");
+
+const iq_r: input_queue = @get_input_queue(2);
+const oq_s: output_queue = @get_output_queue(2);
+const r_id: data_task_id = if (@is_arch("wse2")) @get_data_task_id(recv_c) else @get_data_task_id(iq_r);
+
+var buf = @zeros([2048]f32);                 // h2d target of the host sequence under test
+var ptr_buf: [*]f32 = &buf;
+
+// neighbour that sends to us / that we send to
+const has_src = if (DIR == 0) px > 0 else if (DIR == 1) py > 0 else if (DIR == 2) px + 1 < Pw else py + 1 < Ph;
+const has_dst = if (DIR == 0) px + 1 < Pw else if (DIR == 1) py + 1 < Ph else if (DIR == 2) px > 0 else py > 0;
+// stamps: [round][0 entry, 1 arrival] x 3 u16 words; flag word per slot: 1 = TSC was running
+var st = @zeros([12]u16);
+var ok = @zeros([4]u16);
+var tsc_on: bool = false;
+var tmp = @zeros([timestamp.tsc_size_words]u16);
+var time_buf_u16 = @zeros([16]u16);
+var ptr_time_buf_u16: [*]u16 = &time_buf_u16;
+var round: u16 = 0;
+var nr: u16 = 0;
+
+const out_d = @get_dsd(fabout_dsd, .{ .fabric_color = send_c, .extent = 1, .output_queue = oq_s });
+
+fn put(slot: u16) void {
+  timestamp.get_timestamp(&tmp);
+  st[3 * slot] = tmp[0]; st[3 * slot + 1] = tmp[1]; st[3 * slot + 2] = tmp[2];
+  ok[slot] = if (tsc_on) 1 else 0;
+}
+// v2: main unblocks immediately, so a round never depends on a neighbour (v1's wait-for-arrival made later
+// rounds inherit earlier rounds' skew).  Arrivals are stamped whenever they come.
+fn main() void {
+  if (round < 2) put(2 * round);
+  round += 1;
+  if (has_dst) @mov32(out_d, @as(u32, round));
+  sys_mod.unblock_cmd_stream();
+}
+var want_copy: bool = false;
+fn copy_out() void {
+  for (@range(u16, 12)) |i| { time_buf_u16[i] = st[i]; }
+  for (@range(u16, 4)) |i| { time_buf_u16[12 + i] = ok[i]; }
+  sys_mod.unblock_cmd_stream();
+}
+task from_src(w: u32) void {
+  if (nr < 2) put(2 * nr + 1);
+  nr += 1;
+  if (want_copy and nr >= round) { want_copy = false; copy_out(); }
+}
+
+fn f_enable_timer() void {
+  timestamp.enable_tsc();
+  tsc_on = true;
+  sys_mod.unblock_cmd_stream();
+}
+// the read-out (only) waits for this PE's expected arrivals: the host runs ahead, so an early row would
+// otherwise copy its stamps before a late neighbour's wavelet has arrived
+fn f_memcpy_timestamps() void {
+  if (!has_src or nr >= round) { copy_out(); } else { want_copy = true; }
+}
+
+comptime {
+  @bind_data_task(from_src, r_id);
+  if (@is_arch("wse3")) {
+    @initialize_queue(iq_r, .{ .color = recv_c });
+    @initialize_queue(oq_s, .{ .color = send_c });
+  }
+  @export_symbol(ptr_buf, "buf");
+  @export_symbol(ptr_time_buf_u16, "time_buf_u16");
+  @export_symbol(main);
+  @export_symbol(f_enable_timer);
+  @export_symbol(f_memcpy_timestamps);
+}

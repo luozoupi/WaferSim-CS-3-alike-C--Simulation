@@ -1,0 +1,104 @@
+// Stage 1 / M1 fabric microbenchmark PE program (generated routes in layout.csl).
+// Optional sender (SEND_C, SEND_N words, one fabout DSD), up to 4 receivers (RCk colours, RNk words, one fabin
+// DSD each, own input queue), optional store-and-forward relay (re-send what arrived on RC0 via SEND_C) and an
+// optional receiver arm delay (RDELAY loop iterations).  Stamps: entry, send done, arm, receive done k.
+param memcpy_params;
+param SEND_C: u16;  param SEND_N: u16;
+param NRECV: u16;
+param RC0: u16; param RC1: u16; param RC2: u16; param RC3: u16;
+param RN0: u16; param RN1: u16; param RN2: u16; param RN3: u16;
+param RELAY: u16;
+param RDELAY: u16;
+
+const sys_mod = @import_module("<memcpy/memcpy>", memcpy_params);
+const timestamp = @import_module("<time>");
+const send_id: local_task_id = @get_local_task_id(10);
+const r_id = [4]local_task_id{ @get_local_task_id(11), @get_local_task_id(12), @get_local_task_id(13), @get_local_task_id(14) };
+const oq = @get_output_queue(2);
+const iqs = [4]input_queue{ @get_input_queue(2), @get_input_queue(3), @get_input_queue(4), @get_input_queue(5) };
+const RC = [4]u16{ RC0, RC1, RC2, RC3 };
+const RN = [4]u16{ RN0, RN1, RN2, RN3 };
+const MAXN = 512;
+
+var sbuf = @zeros([MAXN]u32);
+var rbuf0 = @zeros([MAXN]u32);
+var rbuf1 = @zeros([MAXN]u32);
+var rbuf2 = @zeros([MAXN]u32);
+var rbuf3 = @zeros([MAXN]u32);
+var st = @zeros([24]u16);          // 8 stamps x 3 words: 0 entry, 1 send done, 2 arm, 3..6 recv done k
+var tmp = @zeros([timestamp.tsc_size_words]u16);
+var time_buf_u16 = @zeros([24]u16);
+var ptr_time_buf_u16: [*]u16 = &time_buf_u16;
+var pending: u16 = 0;
+
+fn put(slot: u16) void {
+  timestamp.get_timestamp(&tmp);
+  st[3 * slot] = tmp[0]; st[3 * slot + 1] = tmp[1]; st[3 * slot + 2] = tmp[2];
+}
+fn one_done() void {
+  pending -= 1;
+  if (pending == 0) sys_mod.unblock_cmd_stream();
+}
+const send_mem = @get_dsd(mem1d_dsd, .{ .tensor_access = |i|{SEND_N} -> sbuf[i] });
+const relay_mem = @get_dsd(mem1d_dsd, .{ .tensor_access = |i|{SEND_N} -> rbuf0[i] });
+const out_dsd = @get_dsd(fabout_dsd, .{ .extent = SEND_N, .output_queue = oq });
+const rmem0 = @get_dsd(mem1d_dsd, .{ .tensor_access = |i|{RN0} -> rbuf0[i] });
+const rmem1 = @get_dsd(mem1d_dsd, .{ .tensor_access = |i|{RN1} -> rbuf1[i] });
+const rmem2 = @get_dsd(mem1d_dsd, .{ .tensor_access = |i|{RN2} -> rbuf2[i] });
+const rmem3 = @get_dsd(mem1d_dsd, .{ .tensor_access = |i|{RN3} -> rbuf3[i] });
+const rin0 = @get_dsd(fabin_dsd, .{ .extent = RN0, .input_queue = iqs[0] });
+const rin1 = @get_dsd(fabin_dsd, .{ .extent = RN1, .input_queue = iqs[1] });
+const rin2 = @get_dsd(fabin_dsd, .{ .extent = RN2, .input_queue = iqs[2] });
+const rin3 = @get_dsd(fabin_dsd, .{ .extent = RN3, .input_queue = iqs[3] });
+
+fn main() void {
+  put(0);
+  pending = NRECV + (if (SEND_N > 0) @as(u16, 1) else 0);
+  if (pending == 0) { sys_mod.unblock_cmd_stream(); return; }
+  if (SEND_N > 0 and RELAY == 0) {
+    @mov32(out_dsd, send_mem, .{ .async = true, .activate = send_id });
+  }
+  if (NRECV > 0) {
+    var i: u16 = 0;
+    while (i < RDELAY) : (i += 1) { tmp[0] = tmp[0]; }
+    put(2);
+    @mov32(rmem0, rin0, .{ .async = true, .activate = r_id[0] });
+    if (NRECV > 1) { @mov32(rmem1, rin1, .{ .async = true, .activate = r_id[1] }); }
+    if (NRECV > 2) { @mov32(rmem2, rin2, .{ .async = true, .activate = r_id[2] }); }
+    if (NRECV > 3) { @mov32(rmem3, rin3, .{ .async = true, .activate = r_id[3] }); }
+  }
+}
+task send_done() void { put(1); one_done(); }
+task recv0() void {
+  put(3);
+  if (RELAY == 1) { @mov32(out_dsd, relay_mem, .{ .async = true, .activate = send_id }); }
+  one_done();
+}
+task recv1() void { put(4); one_done(); }
+task recv2() void { put(5); one_done(); }
+task recv3() void { put(6); one_done(); }
+
+fn f_enable_timer() void { timestamp.enable_tsc(); sys_mod.unblock_cmd_stream(); }
+fn f_memcpy_timestamps() void {
+  for (@range(u16, 24)) |i| { time_buf_u16[i] = st[i]; }
+  sys_mod.unblock_cmd_stream();
+}
+
+comptime {
+  @bind_local_task(send_done, send_id);
+  @bind_local_task(recv0, r_id[0]);
+  @bind_local_task(recv1, r_id[1]);
+  @bind_local_task(recv2, r_id[2]);
+  @bind_local_task(recv3, r_id[3]);
+  if (@is_arch("wse3")) {
+    if (SEND_N > 0) { @initialize_queue(oq, .{ .color = @get_color(SEND_C) }); }
+    if (NRECV > 0) { @initialize_queue(iqs[0], .{ .color = @get_color(RC0) }); }
+    if (NRECV > 1) { @initialize_queue(iqs[1], .{ .color = @get_color(RC1) }); }
+    if (NRECV > 2) { @initialize_queue(iqs[2], .{ .color = @get_color(RC2) }); }
+    if (NRECV > 3) { @initialize_queue(iqs[3], .{ .color = @get_color(RC3) }); }
+  }
+  @export_symbol(ptr_time_buf_u16, "time_buf_u16");
+  @export_symbol(main);
+  @export_symbol(f_enable_timer);
+  @export_symbol(f_memcpy_timestamps);
+}
